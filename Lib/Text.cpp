@@ -254,5 +254,5 @@ std::string Nice(float f) {
 		t = buf+1;
 	if (strlen(buf) == 2 && buf[0] == '-' && buf[1] == '0')
 		t = buf+1;
-	return string(t);
+	return std::string(t);
 }

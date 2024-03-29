@@ -72,26 +72,54 @@ build edit_cache: phony CMakeFiles/edit_cache.util
 
 build cmake_object_order_depends_target_cg_project: phony || CMakeFiles/cg_project.dir
 
-build CMakeFiles/cg_project.dir/main.cpp.o: CXX_COMPILER__cg_project_Debug /Users/torbenbernhard/Desktop/Seattle$ U/cg-project/main.cpp || cmake_object_order_depends_target_cg_project
-  DEP_FILE = CMakeFiles/cg_project.dir/main.cpp.o.d
+build CMakeFiles/cg_project.dir/test.cpp.o: CXX_COMPILER__cg_project_Debug /Users/torbenbernhard/Desktop/Seattle$ U/cg-project/test.cpp || cmake_object_order_depends_target_cg_project
+  DEP_FILE = CMakeFiles/cg_project.dir/test.cpp.o.d
   FLAGS = -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk -mmacosx-version-min=11.7 -std=gnu++14
-  INCLUDES = -I"/Users/torbenbernhard/Desktop/Seattle U/cg-project/Inc" -isystem /usr/local/include
+  INCLUDES = -I"/Users/torbenbernhard/Desktop/Seattle U/cg-project/Inc" -I"/Users/torbenbernhard/Desktop/Seattle U/cg-project/Inc/freetype" -I"/Users/torbenbernhard/Desktop/Seattle U/cg-project/Inc/freetype/config" -I"/Users/torbenbernhard/Desktop/Seattle U/cg-project/Inc/GL" -I"/Users/torbenbernhard/Desktop/Seattle U/cg-project/GraphicsLayer/Include" -isystem /usr/local/include
   OBJECT_DIR = CMakeFiles/cg_project.dir
   OBJECT_FILE_DIR = CMakeFiles/cg_project.dir
 
 build CMakeFiles/cg_project.dir/Lib/GLXtras.cpp.o: CXX_COMPILER__cg_project_Debug /Users/torbenbernhard/Desktop/Seattle$ U/cg-project/Lib/GLXtras.cpp || cmake_object_order_depends_target_cg_project
   DEP_FILE = CMakeFiles/cg_project.dir/Lib/GLXtras.cpp.o.d
   FLAGS = -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk -mmacosx-version-min=11.7 -std=gnu++14
-  INCLUDES = -I"/Users/torbenbernhard/Desktop/Seattle U/cg-project/Inc" -isystem /usr/local/include
+  INCLUDES = -I"/Users/torbenbernhard/Desktop/Seattle U/cg-project/Inc" -I"/Users/torbenbernhard/Desktop/Seattle U/cg-project/Inc/freetype" -I"/Users/torbenbernhard/Desktop/Seattle U/cg-project/Inc/freetype/config" -I"/Users/torbenbernhard/Desktop/Seattle U/cg-project/Inc/GL" -I"/Users/torbenbernhard/Desktop/Seattle U/cg-project/GraphicsLayer/Include" -isystem /usr/local/include
   OBJECT_DIR = CMakeFiles/cg_project.dir
   OBJECT_FILE_DIR = CMakeFiles/cg_project.dir/Lib
 
 build CMakeFiles/cg_project.dir/Lib/glad.c.o: C_COMPILER__cg_project_Debug /Users/torbenbernhard/Desktop/Seattle$ U/cg-project/Lib/glad.c || cmake_object_order_depends_target_cg_project
   DEP_FILE = CMakeFiles/cg_project.dir/Lib/glad.c.o.d
   FLAGS = -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk -mmacosx-version-min=11.7
-  INCLUDES = -I"/Users/torbenbernhard/Desktop/Seattle U/cg-project/Inc" -isystem /usr/local/include
+  INCLUDES = -I"/Users/torbenbernhard/Desktop/Seattle U/cg-project/Inc" -I"/Users/torbenbernhard/Desktop/Seattle U/cg-project/Inc/freetype" -I"/Users/torbenbernhard/Desktop/Seattle U/cg-project/Inc/freetype/config" -I"/Users/torbenbernhard/Desktop/Seattle U/cg-project/Inc/GL" -I"/Users/torbenbernhard/Desktop/Seattle U/cg-project/GraphicsLayer/Include" -isystem /usr/local/include
   OBJECT_DIR = CMakeFiles/cg_project.dir
   OBJECT_FILE_DIR = CMakeFiles/cg_project.dir/Lib
+
+build CMakeFiles/cg_project.dir/Lib/window.cpp.o: CXX_COMPILER__cg_project_Debug /Users/torbenbernhard/Desktop/Seattle$ U/cg-project/Lib/window.cpp || cmake_object_order_depends_target_cg_project
+  DEP_FILE = CMakeFiles/cg_project.dir/Lib/window.cpp.o.d
+  FLAGS = -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk -mmacosx-version-min=11.7 -std=gnu++14
+  INCLUDES = -I"/Users/torbenbernhard/Desktop/Seattle U/cg-project/Inc" -I"/Users/torbenbernhard/Desktop/Seattle U/cg-project/Inc/freetype" -I"/Users/torbenbernhard/Desktop/Seattle U/cg-project/Inc/freetype/config" -I"/Users/torbenbernhard/Desktop/Seattle U/cg-project/Inc/GL" -I"/Users/torbenbernhard/Desktop/Seattle U/cg-project/GraphicsLayer/Include" -isystem /usr/local/include
+  OBJECT_DIR = CMakeFiles/cg_project.dir
+  OBJECT_FILE_DIR = CMakeFiles/cg_project.dir/Lib
+
+build CMakeFiles/cg_project.dir/GraphicsLayer/Library/MeshRenderer.cpp.o: CXX_COMPILER__cg_project_Debug /Users/torbenbernhard/Desktop/Seattle$ U/cg-project/GraphicsLayer/Library/MeshRenderer.cpp || cmake_object_order_depends_target_cg_project
+  DEP_FILE = CMakeFiles/cg_project.dir/GraphicsLayer/Library/MeshRenderer.cpp.o.d
+  FLAGS = -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk -mmacosx-version-min=11.7 -std=gnu++14
+  INCLUDES = -I"/Users/torbenbernhard/Desktop/Seattle U/cg-project/Inc" -I"/Users/torbenbernhard/Desktop/Seattle U/cg-project/Inc/freetype" -I"/Users/torbenbernhard/Desktop/Seattle U/cg-project/Inc/freetype/config" -I"/Users/torbenbernhard/Desktop/Seattle U/cg-project/Inc/GL" -I"/Users/torbenbernhard/Desktop/Seattle U/cg-project/GraphicsLayer/Include" -isystem /usr/local/include
+  OBJECT_DIR = CMakeFiles/cg_project.dir
+  OBJECT_FILE_DIR = CMakeFiles/cg_project.dir/GraphicsLayer/Library
+
+build CMakeFiles/cg_project.dir/GraphicsLayer/Library/ShaderCompiler.cpp.o: CXX_COMPILER__cg_project_Debug /Users/torbenbernhard/Desktop/Seattle$ U/cg-project/GraphicsLayer/Library/ShaderCompiler.cpp || cmake_object_order_depends_target_cg_project
+  DEP_FILE = CMakeFiles/cg_project.dir/GraphicsLayer/Library/ShaderCompiler.cpp.o.d
+  FLAGS = -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk -mmacosx-version-min=11.7 -std=gnu++14
+  INCLUDES = -I"/Users/torbenbernhard/Desktop/Seattle U/cg-project/Inc" -I"/Users/torbenbernhard/Desktop/Seattle U/cg-project/Inc/freetype" -I"/Users/torbenbernhard/Desktop/Seattle U/cg-project/Inc/freetype/config" -I"/Users/torbenbernhard/Desktop/Seattle U/cg-project/Inc/GL" -I"/Users/torbenbernhard/Desktop/Seattle U/cg-project/GraphicsLayer/Include" -isystem /usr/local/include
+  OBJECT_DIR = CMakeFiles/cg_project.dir
+  OBJECT_FILE_DIR = CMakeFiles/cg_project.dir/GraphicsLayer/Library
+
+build CMakeFiles/cg_project.dir/GraphicsLayer/Library/MeshData.cpp.o: CXX_COMPILER__cg_project_Debug /Users/torbenbernhard/Desktop/Seattle$ U/cg-project/GraphicsLayer/Library/MeshData.cpp || cmake_object_order_depends_target_cg_project
+  DEP_FILE = CMakeFiles/cg_project.dir/GraphicsLayer/Library/MeshData.cpp.o.d
+  FLAGS = -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk -mmacosx-version-min=11.7 -std=gnu++14
+  INCLUDES = -I"/Users/torbenbernhard/Desktop/Seattle U/cg-project/Inc" -I"/Users/torbenbernhard/Desktop/Seattle U/cg-project/Inc/freetype" -I"/Users/torbenbernhard/Desktop/Seattle U/cg-project/Inc/freetype/config" -I"/Users/torbenbernhard/Desktop/Seattle U/cg-project/Inc/GL" -I"/Users/torbenbernhard/Desktop/Seattle U/cg-project/GraphicsLayer/Include" -isystem /usr/local/include
+  OBJECT_DIR = CMakeFiles/cg_project.dir
+  OBJECT_FILE_DIR = CMakeFiles/cg_project.dir/GraphicsLayer/Library
 
 
 # =============================================================================
@@ -101,7 +129,7 @@ build CMakeFiles/cg_project.dir/Lib/glad.c.o: C_COMPILER__cg_project_Debug /User
 #############################################
 # Link the executable cg_project
 
-build cg_project: CXX_EXECUTABLE_LINKER__cg_project_Debug CMakeFiles/cg_project.dir/main.cpp.o CMakeFiles/cg_project.dir/Lib/GLXtras.cpp.o CMakeFiles/cg_project.dir/Lib/glad.c.o | /usr/local/lib/libglfw.3.4.dylib
+build cg_project: CXX_EXECUTABLE_LINKER__cg_project_Debug CMakeFiles/cg_project.dir/test.cpp.o CMakeFiles/cg_project.dir/Lib/GLXtras.cpp.o CMakeFiles/cg_project.dir/Lib/glad.c.o CMakeFiles/cg_project.dir/Lib/window.cpp.o CMakeFiles/cg_project.dir/GraphicsLayer/Library/MeshRenderer.cpp.o CMakeFiles/cg_project.dir/GraphicsLayer/Library/ShaderCompiler.cpp.o CMakeFiles/cg_project.dir/GraphicsLayer/Library/MeshData.cpp.o | /usr/local/lib/libglfw.3.4.dylib
   FLAGS = -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk -mmacosx-version-min=11.7
   LINK_LIBRARIES = -Wl,-rpath,/usr/local/lib  /usr/local/lib/libglfw.3.4.dylib
   OBJECT_DIR = CMakeFiles/cg_project.dir
