@@ -121,6 +121,27 @@ build CMakeFiles/cg_project.dir/GraphicsLayer/Library/MeshData.cpp.o: CXX_COMPIL
   OBJECT_DIR = CMakeFiles/cg_project.dir
   OBJECT_FILE_DIR = CMakeFiles/cg_project.dir/GraphicsLayer/Library
 
+build CMakeFiles/cg_project.dir/GraphicsLayer/Library/Transform.cpp.o: CXX_COMPILER__cg_project_Debug /Users/torbenbernhard/Desktop/Seattle$ U/cg-project/GraphicsLayer/Library/Transform.cpp || cmake_object_order_depends_target_cg_project
+  DEP_FILE = CMakeFiles/cg_project.dir/GraphicsLayer/Library/Transform.cpp.o.d
+  FLAGS = -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk -mmacosx-version-min=11.7 -std=gnu++14
+  INCLUDES = -I"/Users/torbenbernhard/Desktop/Seattle U/cg-project/Inc" -I"/Users/torbenbernhard/Desktop/Seattle U/cg-project/Inc/freetype" -I"/Users/torbenbernhard/Desktop/Seattle U/cg-project/Inc/freetype/config" -I"/Users/torbenbernhard/Desktop/Seattle U/cg-project/Inc/GL" -I"/Users/torbenbernhard/Desktop/Seattle U/cg-project/GraphicsLayer/Include" -isystem /usr/local/include
+  OBJECT_DIR = CMakeFiles/cg_project.dir
+  OBJECT_FILE_DIR = CMakeFiles/cg_project.dir/GraphicsLayer/Library
+
+build CMakeFiles/cg_project.dir/Engine/Library/Time.cpp.o: CXX_COMPILER__cg_project_Debug /Users/torbenbernhard/Desktop/Seattle$ U/cg-project/Engine/Library/Time.cpp || cmake_object_order_depends_target_cg_project
+  DEP_FILE = CMakeFiles/cg_project.dir/Engine/Library/Time.cpp.o.d
+  FLAGS = -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk -mmacosx-version-min=11.7 -std=gnu++14
+  INCLUDES = -I"/Users/torbenbernhard/Desktop/Seattle U/cg-project/Inc" -I"/Users/torbenbernhard/Desktop/Seattle U/cg-project/Inc/freetype" -I"/Users/torbenbernhard/Desktop/Seattle U/cg-project/Inc/freetype/config" -I"/Users/torbenbernhard/Desktop/Seattle U/cg-project/Inc/GL" -I"/Users/torbenbernhard/Desktop/Seattle U/cg-project/GraphicsLayer/Include" -isystem /usr/local/include
+  OBJECT_DIR = CMakeFiles/cg_project.dir
+  OBJECT_FILE_DIR = CMakeFiles/cg_project.dir/Engine/Library
+
+build CMakeFiles/cg_project.dir/Engine/Library/Engine.cpp.o: CXX_COMPILER__cg_project_Debug /Users/torbenbernhard/Desktop/Seattle$ U/cg-project/Engine/Library/Engine.cpp || cmake_object_order_depends_target_cg_project
+  DEP_FILE = CMakeFiles/cg_project.dir/Engine/Library/Engine.cpp.o.d
+  FLAGS = -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk -mmacosx-version-min=11.7 -std=gnu++14
+  INCLUDES = -I"/Users/torbenbernhard/Desktop/Seattle U/cg-project/Inc" -I"/Users/torbenbernhard/Desktop/Seattle U/cg-project/Inc/freetype" -I"/Users/torbenbernhard/Desktop/Seattle U/cg-project/Inc/freetype/config" -I"/Users/torbenbernhard/Desktop/Seattle U/cg-project/Inc/GL" -I"/Users/torbenbernhard/Desktop/Seattle U/cg-project/GraphicsLayer/Include" -isystem /usr/local/include
+  OBJECT_DIR = CMakeFiles/cg_project.dir
+  OBJECT_FILE_DIR = CMakeFiles/cg_project.dir/Engine/Library
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target cg_project
@@ -129,7 +150,7 @@ build CMakeFiles/cg_project.dir/GraphicsLayer/Library/MeshData.cpp.o: CXX_COMPIL
 #############################################
 # Link the executable cg_project
 
-build cg_project: CXX_EXECUTABLE_LINKER__cg_project_Debug CMakeFiles/cg_project.dir/test.cpp.o CMakeFiles/cg_project.dir/Lib/GLXtras.cpp.o CMakeFiles/cg_project.dir/Lib/glad.c.o CMakeFiles/cg_project.dir/Lib/window.cpp.o CMakeFiles/cg_project.dir/GraphicsLayer/Library/MeshRenderer.cpp.o CMakeFiles/cg_project.dir/GraphicsLayer/Library/ShaderCompiler.cpp.o CMakeFiles/cg_project.dir/GraphicsLayer/Library/MeshData.cpp.o | /usr/local/lib/libglfw.3.4.dylib
+build cg_project: CXX_EXECUTABLE_LINKER__cg_project_Debug CMakeFiles/cg_project.dir/test.cpp.o CMakeFiles/cg_project.dir/Lib/GLXtras.cpp.o CMakeFiles/cg_project.dir/Lib/glad.c.o CMakeFiles/cg_project.dir/Lib/window.cpp.o CMakeFiles/cg_project.dir/GraphicsLayer/Library/MeshRenderer.cpp.o CMakeFiles/cg_project.dir/GraphicsLayer/Library/ShaderCompiler.cpp.o CMakeFiles/cg_project.dir/GraphicsLayer/Library/MeshData.cpp.o CMakeFiles/cg_project.dir/GraphicsLayer/Library/Transform.cpp.o CMakeFiles/cg_project.dir/Engine/Library/Time.cpp.o CMakeFiles/cg_project.dir/Engine/Library/Engine.cpp.o | /usr/local/lib/libglfw.3.4.dylib
   FLAGS = -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk -mmacosx-version-min=11.7
   LINK_LIBRARIES = -Wl,-rpath,/usr/local/lib  /usr/local/lib/libglfw.3.4.dylib
   OBJECT_DIR = CMakeFiles/cg_project.dir

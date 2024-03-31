@@ -33,6 +33,10 @@ add_executable(cg_project test.cpp
         GraphicsLayer/Include/MeshData.h
         GraphicsLayer/Include/ShaderCompiler.h
         GraphicsLayer/Library/ShaderCompiler.cpp
-        GraphicsLayer/Library/MeshData.cpp )
+        GraphicsLayer/Library/MeshData.cpp
+        GraphicsLayer/Include/Transform.h GraphicsLayer/Library/Transform.cpp
+        GraphicsLayer/Include/Projection.h
+        Engine/Include/Time.h Engine/Library/Time.cpp
+        Engine/Include/Engine.h Engine/Library/Engine.cpp)
 
 target_link_libraries(cg_project glfw)

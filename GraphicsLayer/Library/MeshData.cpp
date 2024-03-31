@@ -9,7 +9,7 @@
 #include <vector>
 #include <regex>
 
-bool vertRegex(std::string line, vec3& result)
+bool vertRegex(std::string line, glm::vec3& result)
 {
     // Regular expression pattern to match a vertex line
     std::regex vertex_regex("v\\s+(-?\\d+\\.\\d+)\\s+(-?\\d+\\.\\d+)\\s+(-?\\d+\\.\\d+)");
@@ -29,11 +29,35 @@ bool vertRegex(std::string line, vec3& result)
     float v2 = std::stof(match[2]);
     float v3 = std::stof(match[3]);
 
-    result = vec3(v1, v2, v3);
+    result = glm::vec3(v1, v2, v3);
     return true;
 }
 
-bool uvRegex(std::string line, vec2& result)
+bool vcRegex(std::string line, glm::vec3& color)
+{
+    // Regular expression pattern to match a vertex line
+    std::regex vcRegex("vc\\s+(-?\\d+\\.\\d+)\\s+(-?\\d+\\.\\d+)\\s+(-?\\d+\\.\\d+)");
+
+    std::smatch match;
+
+    if (!std::regex_search(line, match, vcRegex)) {
+        return false;
+    }
+
+    if (match.size() < 4)
+    {
+        return false;
+    }
+
+    float v1 = std::stof(match[1]);
+    float v2 = std::stof(match[2]);
+    float v3 = std::stof(match[3]);
+
+    color = glm::vec3(v1, v2, v3);
+    return true;
+}
+
+bool uvRegex(std::string line, glm::vec2& result)
 {
     std::regex uv_regex("vt\\s+(-?\\d+\\.\\d+)\\s+(-?\\d+\\.\\d+)");
 
@@ -47,7 +71,7 @@ bool uvRegex(std::string line, vec2& result)
     float u = std::stof(match[1]);
     float v = std::stof(match[2]);
 
-    result = vec2(u, v);
+    result = glm::vec2(u, v);
     return true;
 }
 
@@ -76,6 +100,7 @@ bool idFaces(std::string line, std::vector<int>& triangles)
             try {
                 num = std::stoi(indexToken); // Convert token to integer
                 triangles.push_back(num); // Add the integer to the triangle
+                std::cout << num << std::endl;
             } catch (const std::invalid_argument& e) {
                 // std::cerr << "Invalid argument: " << e.what() << std::endl;
                 // Handle the error, e.g., ignore the token or abort the operation
@@ -98,6 +123,7 @@ void MeshData::loadOBJ(const char *filePath) {
 // TODO: write the rest of the function
     vertices.clear();
     uvs.clear();
+    colors.clear();
     triangles.clear();
 
     std::string line;
@@ -107,11 +133,16 @@ void MeshData::loadOBJ(const char *filePath) {
         std::string word;
         std::vector<std::string> tokens;
 
-        vec3 vertex;
-        vec2 uv;
+        glm::vec3 vertex;
+        glm::vec2 uv;
+        glm::vec3 color;
         if (vertRegex(line, vertex))
         {
             vertices.emplace_back(vertex);
+        }
+        else if (vcRegex(line, color))
+        {
+            colors.emplace_back(color);
         }
         else if (uvRegex(line, uv))
         {
@@ -121,5 +152,6 @@ void MeshData::loadOBJ(const char *filePath) {
         {
 
         }
+
     }
 }

@@ -6,23 +6,23 @@
 #define CG_PROJECT_MESHDATA_H
 
 #include <vector>
-#include "VecMat.h"
+#include <glm/glm.hpp>
 
 class MeshData
 {
 public:
-    std::vector<vec3> vertices;
-    std::vector<vec3> normals;
-    std::vector<vec3> colors;
-    std::vector<vec2> uvs;
+    std::vector<glm::vec3> vertices;
+    std::vector<glm::vec3> normals;
+    std::vector<glm::vec3> colors;
+    std::vector<glm::vec2> uvs;
     std::vector<int> triangles;
 
     void loadOBJ(const char* filePath);
 };
 
-bool vertRegex(std::string line, vec3& result);
+bool vertRegex(std::string line, glm::vec3& result);
 
-bool uvRegex(std::string line, vec2& result);
+bool uvRegex(std::string line, glm::vec2& result);
 
 bool faceRegex(std::string line);
 

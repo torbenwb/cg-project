@@ -9,5 +9,6 @@
 #include <GLFW/glfw3.h>       // GL toolkit
 #include "MeshRenderer.h"
 #include "ShaderCompiler.h"
+#include "Transform.h"
 
 #endif //CG_PROJECT_GRAPHICSLAYER_H

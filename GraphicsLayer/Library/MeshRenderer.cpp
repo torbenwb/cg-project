@@ -4,6 +4,10 @@
 
 #include "glad.h"
 #include "MeshRenderer.h"
+#include "Transform.h"
+#include <glm/glm.hpp>
+#include <glm/gtc/type_ptr.hpp>
+#include <iostream>
 
 void MeshRenderer::Buffer()
 {
@@ -15,16 +19,16 @@ void MeshRenderer::Buffer()
 
 
     int numVertices = meshData->vertices.size();
-    int vertexSpaceSize = numVertices * sizeof(vec3);
+    int vertexSpaceSize = numVertices * sizeof(glm::vec3);
 
     int numNormals = meshData->normals.size();
-    int normalSpaceSize = numNormals * sizeof(vec3);
+    int normalSpaceSize = numNormals * sizeof(glm::vec3);
 
     int numColors = meshData->colors.size();
-    int colorSpaceSize = numColors * sizeof(vec3);
+    int colorSpaceSize = numColors * sizeof(glm::vec3);
 
     int numUVs = meshData->uvs.size();
-    int uvSpaceSize = numUVs * sizeof(vec2);
+    int uvSpaceSize = numUVs * sizeof(glm::vec2);
 
     int fullBufferSize = vertexSpaceSize + normalSpaceSize + colorSpaceSize + uvSpaceSize;
 
@@ -50,14 +54,17 @@ void MeshRenderer::Buffer()
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, trisBufferSize, meshData->triangles.data(), GL_STATIC_DRAW);
 }
 
-void MeshRenderer::Render(GLuint shaderProgram)
+void MeshRenderer::Render(GLuint shaderProgram, Transform model, Transform view, Projection projection)
 {
-    int normalOffset = meshData->vertices.size() * sizeof(vec3);
-    int colorOffset = (meshData->vertices.size() + meshData->normals.size()) * sizeof(vec3);
-    int uvOffset = colorOffset + meshData->colors.size() * sizeof(vec3);
+    int normalOffset = meshData->vertices.size() * sizeof(glm::vec3);
+    int colorOffset = (meshData->vertices.size() + meshData->normals.size()) * sizeof(glm::vec3);
+    int uvOffset = colorOffset + meshData->colors.size() * sizeof(glm::vec3);
 
     // TODO: Set Uniforms: modelView matrix, cameraView Matrix, cameraPerspective Matrix
 
+    glUniformMatrix4fv(glGetUniformLocation(shaderProgram, "model"), 1, GL_FALSE, glm::value_ptr(model.getMatrix()));
+    glUniformMatrix4fv(glGetUniformLocation(shaderProgram, "view"), 1, GL_FALSE, glm::value_ptr(view.getMatrix()));
+    glUniformMatrix4fv(glGetUniformLocation(shaderProgram, "perspective"), 1, GL_FALSE, glm::value_ptr(projection.getMatrix()));
 
     // TODO: Add support for 0 to many uniform variables
     glBindBuffer(GL_ARRAY_BUFFER, VBO);

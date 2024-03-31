@@ -6,8 +6,9 @@
 #define CG_PROJECT_MESHRENDERER_H
 
 #include <vector>
-#include "VecMat.h"
 #include "MeshData.h"
+#include "Transform.h"
+#include "Projection.h"
 
 class MeshRenderer
 {
@@ -19,7 +20,7 @@ public:
     GLuint EBO;
 
     void Buffer();
-    void Render(GLuint shaderProgram);
+    void Render(GLuint shaderProgram, Transform model, Transform view, Projection projection);
 
 };
 
