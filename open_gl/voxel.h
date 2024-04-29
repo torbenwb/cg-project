@@ -44,6 +44,8 @@ namespace open_gl
         static Mesh* toMesh(std::vector<glm::vec3> vertices, std::vector<int> indices, std::vector<glm::vec2> uvs);
         static Mesh* generateChunkMesh(int xOrigin = 0, int zOrigin = 0);
         static uint getVoxelType(int x, int y, int z);
+        static double randomDouble(double min, double max);
+        static int randomInt(int min, int max);
     };
 
     Mesh* voxel::toMesh(std::vector<glm::vec3> vertices, std::vector<int> indices, std::vector<glm::vec2> uvs) {
@@ -220,12 +222,13 @@ namespace open_gl
      * Get voxel type at global x, y, z coordinates
      */
     uint voxel::getVoxelType(int x, int y, int z) {
-        const int xSeed = 25;
+        if (y <= 1) return 2;
+        const int xSeed = 15;
         const int ySeed = 10;
-        const int zSeed = 15;
-        const int powSeed = 5;
-        const double coefSeed = 1.5;
-        const double coefSeed2 = 3.0;
+        const int zSeed = 25;
+        const int powSeed = 3;
+        const double coefSeed = 1.5f;
+        const double coefSeed2 = 3.0f;
         double h = noise::PerlinNoise::getInstance().noise((double)x / xSeed, (double)z / zSeed, (double)y / ySeed);
 
         h *= coefSeed;
@@ -238,7 +241,10 @@ namespace open_gl
     }
 
     void voxel::getFaceUVs(const char face, const uint voxelType, std::vector<glm::vec2>& uvs) {
-
+        if (voxelType == 2){
+            texture_images::atlas::getUVs(0, 0, 2, 2, uvs);
+            return;
+        }
         if (face == TOP_FACE) texture_images::atlas::getUVs(0, 1, 2, 2, uvs);
         else if (face == LEFT_FACE) texture_images::atlas::getUVs(1, 1, 2, 2, uvs, 1);
         else if (face == RIGHT_FACE) texture_images::atlas::getUVs(1, 1, 2, 2, uvs, 1);
@@ -247,6 +253,20 @@ namespace open_gl
         else texture_images::atlas::getUVs(1, 1, 2, 2, uvs);
         return;
 
+    }
+
+    double voxel::randomDouble(double min, double max) {
+        std::random_device rd;
+        std::mt19937 gen(rd());
+        std::uniform_real_distribution<double> dis(min, max);
+        return dis(gen);
+    }
+
+    int voxel::randomInt(int min, int max){
+        std::random_device rd;
+        std::mt19937 gen(rd());
+        std::uniform_int_distribution<int> dis(min, max);
+        return dis(gen);
     }
 }
 
