@@ -100,7 +100,6 @@ bool idFaces(std::string line, std::vector<int>& triangles)
             try {
                 num = std::stoi(indexToken); // Convert token to integer
                 triangles.push_back(num); // Add the integer to the triangle
-                std::cout << num << std::endl;
             } catch (const std::invalid_argument& e) {
                 // std::cerr << "Invalid argument: " << e.what() << std::endl;
                 // Handle the error, e.g., ignore the token or abort the operation
@@ -154,4 +153,36 @@ void MeshData::loadOBJ(const char *filePath) {
         }
 
     }
+}
+
+void MeshData::generatePlane(int subdivisionsX, int subdivisionsY) {
+    clear();
+
+    for (int x = 0; x < subdivisionsX; x++)
+    {
+        for (int y = 0; y < subdivisionsY; y++)
+        {
+            int vCount = vertices.size();
+            vertices.emplace_back(glm::vec3(x, y, 0));
+            vertices.emplace_back(glm::vec3(x + 1, y, 0));
+            vertices.emplace_back(glm::vec3(x + 1, y + 1, 0));
+            vertices.emplace_back(glm::vec3(x, y + 1, 0));
+
+            triangles.emplace_back(vCount);
+            triangles.emplace_back(vCount + 1);
+            triangles.emplace_back(vCount + 2);
+
+            triangles.emplace_back(vCount);
+            triangles.emplace_back(vCount + 2);
+            triangles.emplace_back(vCount + 3);
+        }
+    }
+}
+
+void MeshData::clear() {
+    vertices.clear();
+    normals.clear();
+    colors.clear();
+    uvs.clear();
+    triangles.clear();
 }

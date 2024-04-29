@@ -5,8 +5,6 @@
 #ifndef CG_PROJECT_ENGINE_H
 #define CG_PROJECT_ENGINE_H
 
-#include "Time.h"
-
 class Engine
 {
 private:

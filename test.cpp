@@ -2,8 +2,7 @@
 
 #include "glad.h" // GL header file
 #include <GLFW/glfw3.h>       // GL toolkit
-#include <stdio.h>			// printf, etc
-#include "window.h"
+#include <iostream>
 #include "GraphicsLayer.h"
 #include <glm/glm.hpp>
 #include "Engine/Include/Engine.h"
@@ -56,35 +55,80 @@ const char *pixelShader = R"(
 
 class TestEngine : public Engine
 {
-    GLFWwindow* window;
+    Window window;
+    MeshData* testMeshData;
+    MeshRenderer testMeshRenderer;
+    Transform model;
+    Transform view;
+    Projection projection;
+    glm::vec3 testControlRotation = glm::vec3(0.0f, 0.0f, 0.0f);
     virtual void runStartupLogic()
     {
-        MeshData testMeshData;
-        testMeshData.loadOBJ("/Users/torbenbernhard/Desktop/Seattle U/cg-project/cube.obj");
+        testMeshData = new MeshData();
+        testMeshData->loadOBJ("/Users/torbenbernhard/Desktop/Seattle U/cg-project/cube.obj");
+        //testMeshData->generatePlane(10, 10);
+        window = Window(500, 500, "Title");
+        window.open();
+        testMeshRenderer = MeshRenderer();
 
-        window = initWindow(0, 0, 200, 200,"Title");
-
-        MeshRenderer testMesh = MeshRenderer();
-
-        testMesh.meshData = &testMeshData;
-        testMesh.Buffer();
+        testMeshRenderer.meshData = testMeshData;
+        testMeshRenderer.Buffer();
 
         GLuint vertexProgram = compileShader(&vertexShader, GL_VERTEX_SHADER);
         GLuint fragmentProgram = compileShader(&pixelShader, GL_FRAGMENT_SHADER);
         program = linkShaderProgram(vertexProgram, fragmentProgram);
 
-        Transform model = Transform();
-        Transform view = Transform();
+        model = Transform();
+        view = Transform();
         view.position.z = -5.0f;
-        Projection projection = Projection(1.0f, 1.0f, 0.1f, 100.0f);
+        view.rotation = glm::quat();
+        projection = Projection(1.0f, 1.0f, 0.1f, 100.0f);
 
         glm::vec3 viewRotation = glm::vec3(0.0f, 0.0f, 0.0f);
-        close = glfwWindowShouldClose(window);
+        close = window.getShouldClose();
     }
 
     virtual void runAppLogic()
     {
+        float deltaTime = 0.01f;
+        glm::vec3 moveVector = glm::vec3(0.0f, 0.0f, 0.0f);
+        float moveSpeed = 10.0f;
 
+        if (window.getKey(GLFW_KEY_W))
+        {
+            moveVector += view.getForward();
+        }
+        if (window.getKey(GLFW_KEY_S))
+        {
+            moveVector -= view.getForward();
+        }
+        if (window.getKey(GLFW_KEY_A))
+        {
+            moveVector -= view.getRight();
+        }
+        if (window.getKey(GLFW_KEY_D))
+        {
+            moveVector += view.getRight();
+        }
+        if (window.getKey(GLFW_KEY_SPACE))
+        {
+            moveVector += view.getUp();
+        }
+
+        view.position += moveVector * moveSpeed * deltaTime;
+
+
+
+        if (window.getKey(GLFW_KEY_LEFT))
+        {
+            testControlRotation.y -= 0.01f;
+        }
+        if (window.getKey(GLFW_KEY_RIGHT))
+        {
+            testControlRotation.y += 0.01f;
+        }
+
+        view.rotation = glm::quat(testControlRotation);
     }
 
     virtual void runDisplayLogic()
@@ -96,17 +140,37 @@ class TestEngine : public Engine
         glClear(GL_DEPTH_BUFFER_BIT);
         glEnable(GL_DEPTH_TEST);
 
+        testMeshRenderer.Render(program, model, view, projection);
+
         glDisable(GL_DEPTH_TEST);
         glFlush();
-        glfwSwapBuffers(window);
-        glfwPollEvents();
-        close = glfwWindowShouldClose(window);
+        window.update();
+        close = window.getShouldClose();
     }
 
     virtual void runCloseLogic()
     {
-        glfwDestroyWindow(window);
-        glfwTerminate();
+        window.close();
+    }
+};
+
+class SceneEngine : public Engine
+{
+    Window* window;
+
+    void runStartupLogic() override
+    {
+
+    }
+
+    void runAppLogic() override
+    {
+
+    }
+
+    void runDisplayLogic() override
+    {
+
     }
 };
 
@@ -114,46 +178,5 @@ int main()
 {
     TestEngine testEngine = TestEngine();
     testEngine.run();
-    return 0;
-    MeshData testMeshData;
-    testMeshData.loadOBJ("/Users/torbenbernhard/Desktop/Seattle U/cg-project/cube.obj");
-
-    GLFWwindow* window = initWindow(0, 0, 200, 200,"Title");
-
-    MeshRenderer testMesh = MeshRenderer();
-
-    testMesh.meshData = &testMeshData;
-    testMesh.Buffer();
-
-    GLuint vertexProgram = compileShader(&vertexShader, GL_VERTEX_SHADER);
-    GLuint fragmentProgram = compileShader(&pixelShader, GL_FRAGMENT_SHADER);
-    program = linkShaderProgram(vertexProgram, fragmentProgram);
-
-    Transform model = Transform();
-    Transform view = Transform();
-    view.position.z = -5.0f;
-    Projection projection = Projection(1.0f, 1.0f, 0.1f, 100.0f);
-
-    glm::vec3 viewRotation = glm::vec3(0.0f, 0.0f, 0.0f);
-
-
-    while (!glfwWindowShouldClose(window)) {
-        // Clear background
-        glClearColor(1,1,1,1);
-        glClear(GL_COLOR_BUFFER_BIT);
-        // Enable Depth Test
-        glClear(GL_DEPTH_BUFFER_BIT);
-        glEnable(GL_DEPTH_TEST);
-
-        view.rotation = glm::quat(viewRotation);
-        testMesh.Render(program, model, view, projection);
-
-        glDisable(GL_DEPTH_TEST);
-        glFlush();
-        glfwSwapBuffers(window);
-        glfwPollEvents();
-    }
-    glfwDestroyWindow(window);
-    glfwTerminate();
     return 0;
 }

@@ -17,7 +17,9 @@ public:
     std::vector<glm::vec2> uvs;
     std::vector<int> triangles;
 
+    void clear();
     void loadOBJ(const char* filePath);
+    void generatePlane(int subdivisionsX, int subdivisionsY);
 };
 
 bool vertRegex(std::string line, glm::vec3& result);

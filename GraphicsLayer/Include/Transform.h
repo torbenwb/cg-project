@@ -23,7 +23,9 @@ public:
     }
 
     glm::mat4 getMatrix();
-
+    glm::vec3 getForward();
+    glm::vec3 getRight();
+    glm::vec3 getUp();
 };
 
 #endif //CG_PROJECT_TRANSFORM_H

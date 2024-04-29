@@ -67,8 +67,9 @@ void MeshRenderer::Render(GLuint shaderProgram, Transform model, Transform view,
     glUniformMatrix4fv(glGetUniformLocation(shaderProgram, "perspective"), 1, GL_FALSE, glm::value_ptr(projection.getMatrix()));
 
     // TODO: Add support for 0 to many uniform variables
-    glBindBuffer(GL_ARRAY_BUFFER, VBO);
+
     glUseProgram(shaderProgram);
+    glBindBuffer(GL_ARRAY_BUFFER, VBO);
 
     GLint vertexAttributeID = glGetAttribLocation(shaderProgram, "point");
     glEnableVertexAttribArray(vertexAttributeID);

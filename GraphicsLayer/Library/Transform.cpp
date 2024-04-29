@@ -17,3 +17,18 @@ glm::mat4 Transform::getMatrix()
 
     return transformation;
 }
+
+glm::vec3 Transform::getForward() {
+    glm::mat4 transform = getMatrix();
+    return glm::vec3(transform[0][2], transform[1][2], transform[2][2]);
+}
+
+glm::vec3 Transform::getRight() {
+    glm::mat4 transform = getMatrix();
+    return -glm::vec3(transform[0][0], transform[1][0], transform[2][0]);
+}
+
+glm::vec3 Transform::getUp() {
+    glm::mat4 transform = getMatrix();
+    return -glm::vec3(transform[0][1], transform[1][1], transform[2][1]);
+}

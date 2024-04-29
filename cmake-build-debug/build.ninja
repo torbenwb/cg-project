@@ -39,13 +39,13 @@ include CMakeFiles/rules.ninja
 #############################################
 # Logical path to working directory; prefix for absolute paths.
 
-cmake_ninja_workdir = /Users/torbenbernhard/Desktop/Seattle$ U/cg-project/cmake-build-debug/
+cmake_ninja_workdir = /Users/torbenbernhard/Desktop/Seattle$ U/Spring$ Quarter$ 2024/Graphics$ Project/cg-project/cmake-build-debug/
 
 #############################################
 # Utility command for rebuild_cache
 
 build CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = cd "/Users/torbenbernhard/Desktop/Seattle U/cg-project/cmake-build-debug" && /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake --regenerate-during-build -S"/Users/torbenbernhard/Desktop/Seattle U/cg-project" -B"/Users/torbenbernhard/Desktop/Seattle U/cg-project/cmake-build-debug"
+  COMMAND = cd "/Users/torbenbernhard/Desktop/Seattle U/Spring Quarter 2024/Graphics Project/cg-project/cmake-build-debug" && /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake --regenerate-during-build -S"/Users/torbenbernhard/Desktop/Seattle U/Spring Quarter 2024/Graphics Project/cg-project" -B"/Users/torbenbernhard/Desktop/Seattle U/Spring Quarter 2024/Graphics Project/cg-project/cmake-build-debug"
   DESC = Running CMake to regenerate build system...
   pool = console
   restat = 1
@@ -57,7 +57,7 @@ build rebuild_cache: phony CMakeFiles/rebuild_cache.util
 # Utility command for edit_cache
 
 build CMakeFiles/edit_cache.util: CUSTOM_COMMAND
-  COMMAND = cd "/Users/torbenbernhard/Desktop/Seattle U/cg-project/cmake-build-debug" && /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+  COMMAND = cd "/Users/torbenbernhard/Desktop/Seattle U/Spring Quarter 2024/Graphics Project/cg-project/cmake-build-debug" && /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
   DESC = No interactive CMake dialog available...
   restat = 1
 
@@ -72,75 +72,68 @@ build edit_cache: phony CMakeFiles/edit_cache.util
 
 build cmake_object_order_depends_target_cg_project: phony || CMakeFiles/cg_project.dir
 
-build CMakeFiles/cg_project.dir/test.cpp.o: CXX_COMPILER__cg_project_Debug /Users/torbenbernhard/Desktop/Seattle$ U/cg-project/test.cpp || cmake_object_order_depends_target_cg_project
-  DEP_FILE = CMakeFiles/cg_project.dir/test.cpp.o.d
+build CMakeFiles/cg_project.dir/main.cpp.o: CXX_COMPILER__cg_project_Debug /Users/torbenbernhard/Desktop/Seattle$ U/Spring$ Quarter$ 2024/Graphics$ Project/cg-project/main.cpp || cmake_object_order_depends_target_cg_project
+  DEP_FILE = CMakeFiles/cg_project.dir/main.cpp.o.d
   FLAGS = -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk -mmacosx-version-min=11.7 -std=gnu++14
-  INCLUDES = -I"/Users/torbenbernhard/Desktop/Seattle U/cg-project/Inc" -I"/Users/torbenbernhard/Desktop/Seattle U/cg-project/Inc/freetype" -I"/Users/torbenbernhard/Desktop/Seattle U/cg-project/Inc/freetype/config" -I"/Users/torbenbernhard/Desktop/Seattle U/cg-project/Inc/GL" -I"/Users/torbenbernhard/Desktop/Seattle U/cg-project/GraphicsLayer/Include" -isystem /usr/local/include
+  INCLUDES = -I"/Users/torbenbernhard/Desktop/Seattle U/Spring Quarter 2024/Graphics Project/cg-project/Inc" -I"/Users/torbenbernhard/Desktop/Seattle U/Spring Quarter 2024/Graphics Project/cg-project/Inc/freetype" -I"/Users/torbenbernhard/Desktop/Seattle U/Spring Quarter 2024/Graphics Project/cg-project/Inc/freetype/config" -I"/Users/torbenbernhard/Desktop/Seattle U/Spring Quarter 2024/Graphics Project/cg-project/Inc/GL" -I"/Users/torbenbernhard/Desktop/Seattle U/Spring Quarter 2024/Graphics Project/cg-project/open_gl" -I"/Users/torbenbernhard/Desktop/Seattle U/Spring Quarter 2024/Graphics Project/cg-project/math" -isystem /usr/local/include
   OBJECT_DIR = CMakeFiles/cg_project.dir
   OBJECT_FILE_DIR = CMakeFiles/cg_project.dir
 
-build CMakeFiles/cg_project.dir/Lib/GLXtras.cpp.o: CXX_COMPILER__cg_project_Debug /Users/torbenbernhard/Desktop/Seattle$ U/cg-project/Lib/GLXtras.cpp || cmake_object_order_depends_target_cg_project
-  DEP_FILE = CMakeFiles/cg_project.dir/Lib/GLXtras.cpp.o.d
-  FLAGS = -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk -mmacosx-version-min=11.7 -std=gnu++14
-  INCLUDES = -I"/Users/torbenbernhard/Desktop/Seattle U/cg-project/Inc" -I"/Users/torbenbernhard/Desktop/Seattle U/cg-project/Inc/freetype" -I"/Users/torbenbernhard/Desktop/Seattle U/cg-project/Inc/freetype/config" -I"/Users/torbenbernhard/Desktop/Seattle U/cg-project/Inc/GL" -I"/Users/torbenbernhard/Desktop/Seattle U/cg-project/GraphicsLayer/Include" -isystem /usr/local/include
-  OBJECT_DIR = CMakeFiles/cg_project.dir
-  OBJECT_FILE_DIR = CMakeFiles/cg_project.dir/Lib
-
-build CMakeFiles/cg_project.dir/Lib/glad.c.o: C_COMPILER__cg_project_Debug /Users/torbenbernhard/Desktop/Seattle$ U/cg-project/Lib/glad.c || cmake_object_order_depends_target_cg_project
+build CMakeFiles/cg_project.dir/Lib/glad.c.o: C_COMPILER__cg_project_Debug /Users/torbenbernhard/Desktop/Seattle$ U/Spring$ Quarter$ 2024/Graphics$ Project/cg-project/Lib/glad.c || cmake_object_order_depends_target_cg_project
   DEP_FILE = CMakeFiles/cg_project.dir/Lib/glad.c.o.d
   FLAGS = -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk -mmacosx-version-min=11.7
-  INCLUDES = -I"/Users/torbenbernhard/Desktop/Seattle U/cg-project/Inc" -I"/Users/torbenbernhard/Desktop/Seattle U/cg-project/Inc/freetype" -I"/Users/torbenbernhard/Desktop/Seattle U/cg-project/Inc/freetype/config" -I"/Users/torbenbernhard/Desktop/Seattle U/cg-project/Inc/GL" -I"/Users/torbenbernhard/Desktop/Seattle U/cg-project/GraphicsLayer/Include" -isystem /usr/local/include
+  INCLUDES = -I"/Users/torbenbernhard/Desktop/Seattle U/Spring Quarter 2024/Graphics Project/cg-project/Inc" -I"/Users/torbenbernhard/Desktop/Seattle U/Spring Quarter 2024/Graphics Project/cg-project/Inc/freetype" -I"/Users/torbenbernhard/Desktop/Seattle U/Spring Quarter 2024/Graphics Project/cg-project/Inc/freetype/config" -I"/Users/torbenbernhard/Desktop/Seattle U/Spring Quarter 2024/Graphics Project/cg-project/Inc/GL" -I"/Users/torbenbernhard/Desktop/Seattle U/Spring Quarter 2024/Graphics Project/cg-project/open_gl" -I"/Users/torbenbernhard/Desktop/Seattle U/Spring Quarter 2024/Graphics Project/cg-project/math" -isystem /usr/local/include
   OBJECT_DIR = CMakeFiles/cg_project.dir
   OBJECT_FILE_DIR = CMakeFiles/cg_project.dir/Lib
 
-build CMakeFiles/cg_project.dir/Lib/window.cpp.o: CXX_COMPILER__cg_project_Debug /Users/torbenbernhard/Desktop/Seattle$ U/cg-project/Lib/window.cpp || cmake_object_order_depends_target_cg_project
-  DEP_FILE = CMakeFiles/cg_project.dir/Lib/window.cpp.o.d
+build CMakeFiles/cg_project.dir/open_gl/window.cpp.o: CXX_COMPILER__cg_project_Debug /Users/torbenbernhard/Desktop/Seattle$ U/Spring$ Quarter$ 2024/Graphics$ Project/cg-project/open_gl/window.cpp || cmake_object_order_depends_target_cg_project
+  DEP_FILE = CMakeFiles/cg_project.dir/open_gl/window.cpp.o.d
   FLAGS = -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk -mmacosx-version-min=11.7 -std=gnu++14
-  INCLUDES = -I"/Users/torbenbernhard/Desktop/Seattle U/cg-project/Inc" -I"/Users/torbenbernhard/Desktop/Seattle U/cg-project/Inc/freetype" -I"/Users/torbenbernhard/Desktop/Seattle U/cg-project/Inc/freetype/config" -I"/Users/torbenbernhard/Desktop/Seattle U/cg-project/Inc/GL" -I"/Users/torbenbernhard/Desktop/Seattle U/cg-project/GraphicsLayer/Include" -isystem /usr/local/include
+  INCLUDES = -I"/Users/torbenbernhard/Desktop/Seattle U/Spring Quarter 2024/Graphics Project/cg-project/Inc" -I"/Users/torbenbernhard/Desktop/Seattle U/Spring Quarter 2024/Graphics Project/cg-project/Inc/freetype" -I"/Users/torbenbernhard/Desktop/Seattle U/Spring Quarter 2024/Graphics Project/cg-project/Inc/freetype/config" -I"/Users/torbenbernhard/Desktop/Seattle U/Spring Quarter 2024/Graphics Project/cg-project/Inc/GL" -I"/Users/torbenbernhard/Desktop/Seattle U/Spring Quarter 2024/Graphics Project/cg-project/open_gl" -I"/Users/torbenbernhard/Desktop/Seattle U/Spring Quarter 2024/Graphics Project/cg-project/math" -isystem /usr/local/include
   OBJECT_DIR = CMakeFiles/cg_project.dir
-  OBJECT_FILE_DIR = CMakeFiles/cg_project.dir/Lib
+  OBJECT_FILE_DIR = CMakeFiles/cg_project.dir/open_gl
 
-build CMakeFiles/cg_project.dir/GraphicsLayer/Library/MeshRenderer.cpp.o: CXX_COMPILER__cg_project_Debug /Users/torbenbernhard/Desktop/Seattle$ U/cg-project/GraphicsLayer/Library/MeshRenderer.cpp || cmake_object_order_depends_target_cg_project
-  DEP_FILE = CMakeFiles/cg_project.dir/GraphicsLayer/Library/MeshRenderer.cpp.o.d
+build CMakeFiles/cg_project.dir/open_gl/mesh.cpp.o: CXX_COMPILER__cg_project_Debug /Users/torbenbernhard/Desktop/Seattle$ U/Spring$ Quarter$ 2024/Graphics$ Project/cg-project/open_gl/mesh.cpp || cmake_object_order_depends_target_cg_project
+  DEP_FILE = CMakeFiles/cg_project.dir/open_gl/mesh.cpp.o.d
   FLAGS = -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk -mmacosx-version-min=11.7 -std=gnu++14
-  INCLUDES = -I"/Users/torbenbernhard/Desktop/Seattle U/cg-project/Inc" -I"/Users/torbenbernhard/Desktop/Seattle U/cg-project/Inc/freetype" -I"/Users/torbenbernhard/Desktop/Seattle U/cg-project/Inc/freetype/config" -I"/Users/torbenbernhard/Desktop/Seattle U/cg-project/Inc/GL" -I"/Users/torbenbernhard/Desktop/Seattle U/cg-project/GraphicsLayer/Include" -isystem /usr/local/include
+  INCLUDES = -I"/Users/torbenbernhard/Desktop/Seattle U/Spring Quarter 2024/Graphics Project/cg-project/Inc" -I"/Users/torbenbernhard/Desktop/Seattle U/Spring Quarter 2024/Graphics Project/cg-project/Inc/freetype" -I"/Users/torbenbernhard/Desktop/Seattle U/Spring Quarter 2024/Graphics Project/cg-project/Inc/freetype/config" -I"/Users/torbenbernhard/Desktop/Seattle U/Spring Quarter 2024/Graphics Project/cg-project/Inc/GL" -I"/Users/torbenbernhard/Desktop/Seattle U/Spring Quarter 2024/Graphics Project/cg-project/open_gl" -I"/Users/torbenbernhard/Desktop/Seattle U/Spring Quarter 2024/Graphics Project/cg-project/math" -isystem /usr/local/include
   OBJECT_DIR = CMakeFiles/cg_project.dir
-  OBJECT_FILE_DIR = CMakeFiles/cg_project.dir/GraphicsLayer/Library
+  OBJECT_FILE_DIR = CMakeFiles/cg_project.dir/open_gl
 
-build CMakeFiles/cg_project.dir/GraphicsLayer/Library/ShaderCompiler.cpp.o: CXX_COMPILER__cg_project_Debug /Users/torbenbernhard/Desktop/Seattle$ U/cg-project/GraphicsLayer/Library/ShaderCompiler.cpp || cmake_object_order_depends_target_cg_project
-  DEP_FILE = CMakeFiles/cg_project.dir/GraphicsLayer/Library/ShaderCompiler.cpp.o.d
+build CMakeFiles/cg_project.dir/math/transform.cpp.o: CXX_COMPILER__cg_project_Debug /Users/torbenbernhard/Desktop/Seattle$ U/Spring$ Quarter$ 2024/Graphics$ Project/cg-project/math/transform.cpp || cmake_object_order_depends_target_cg_project
+  DEP_FILE = CMakeFiles/cg_project.dir/math/transform.cpp.o.d
   FLAGS = -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk -mmacosx-version-min=11.7 -std=gnu++14
-  INCLUDES = -I"/Users/torbenbernhard/Desktop/Seattle U/cg-project/Inc" -I"/Users/torbenbernhard/Desktop/Seattle U/cg-project/Inc/freetype" -I"/Users/torbenbernhard/Desktop/Seattle U/cg-project/Inc/freetype/config" -I"/Users/torbenbernhard/Desktop/Seattle U/cg-project/Inc/GL" -I"/Users/torbenbernhard/Desktop/Seattle U/cg-project/GraphicsLayer/Include" -isystem /usr/local/include
+  INCLUDES = -I"/Users/torbenbernhard/Desktop/Seattle U/Spring Quarter 2024/Graphics Project/cg-project/Inc" -I"/Users/torbenbernhard/Desktop/Seattle U/Spring Quarter 2024/Graphics Project/cg-project/Inc/freetype" -I"/Users/torbenbernhard/Desktop/Seattle U/Spring Quarter 2024/Graphics Project/cg-project/Inc/freetype/config" -I"/Users/torbenbernhard/Desktop/Seattle U/Spring Quarter 2024/Graphics Project/cg-project/Inc/GL" -I"/Users/torbenbernhard/Desktop/Seattle U/Spring Quarter 2024/Graphics Project/cg-project/open_gl" -I"/Users/torbenbernhard/Desktop/Seattle U/Spring Quarter 2024/Graphics Project/cg-project/math" -isystem /usr/local/include
   OBJECT_DIR = CMakeFiles/cg_project.dir
-  OBJECT_FILE_DIR = CMakeFiles/cg_project.dir/GraphicsLayer/Library
+  OBJECT_FILE_DIR = CMakeFiles/cg_project.dir/math
 
-build CMakeFiles/cg_project.dir/GraphicsLayer/Library/MeshData.cpp.o: CXX_COMPILER__cg_project_Debug /Users/torbenbernhard/Desktop/Seattle$ U/cg-project/GraphicsLayer/Library/MeshData.cpp || cmake_object_order_depends_target_cg_project
-  DEP_FILE = CMakeFiles/cg_project.dir/GraphicsLayer/Library/MeshData.cpp.o.d
+build CMakeFiles/cg_project.dir/open_gl/camera.cpp.o: CXX_COMPILER__cg_project_Debug /Users/torbenbernhard/Desktop/Seattle$ U/Spring$ Quarter$ 2024/Graphics$ Project/cg-project/open_gl/camera.cpp || cmake_object_order_depends_target_cg_project
+  DEP_FILE = CMakeFiles/cg_project.dir/open_gl/camera.cpp.o.d
   FLAGS = -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk -mmacosx-version-min=11.7 -std=gnu++14
-  INCLUDES = -I"/Users/torbenbernhard/Desktop/Seattle U/cg-project/Inc" -I"/Users/torbenbernhard/Desktop/Seattle U/cg-project/Inc/freetype" -I"/Users/torbenbernhard/Desktop/Seattle U/cg-project/Inc/freetype/config" -I"/Users/torbenbernhard/Desktop/Seattle U/cg-project/Inc/GL" -I"/Users/torbenbernhard/Desktop/Seattle U/cg-project/GraphicsLayer/Include" -isystem /usr/local/include
+  INCLUDES = -I"/Users/torbenbernhard/Desktop/Seattle U/Spring Quarter 2024/Graphics Project/cg-project/Inc" -I"/Users/torbenbernhard/Desktop/Seattle U/Spring Quarter 2024/Graphics Project/cg-project/Inc/freetype" -I"/Users/torbenbernhard/Desktop/Seattle U/Spring Quarter 2024/Graphics Project/cg-project/Inc/freetype/config" -I"/Users/torbenbernhard/Desktop/Seattle U/Spring Quarter 2024/Graphics Project/cg-project/Inc/GL" -I"/Users/torbenbernhard/Desktop/Seattle U/Spring Quarter 2024/Graphics Project/cg-project/open_gl" -I"/Users/torbenbernhard/Desktop/Seattle U/Spring Quarter 2024/Graphics Project/cg-project/math" -isystem /usr/local/include
   OBJECT_DIR = CMakeFiles/cg_project.dir
-  OBJECT_FILE_DIR = CMakeFiles/cg_project.dir/GraphicsLayer/Library
+  OBJECT_FILE_DIR = CMakeFiles/cg_project.dir/open_gl
 
-build CMakeFiles/cg_project.dir/GraphicsLayer/Library/Transform.cpp.o: CXX_COMPILER__cg_project_Debug /Users/torbenbernhard/Desktop/Seattle$ U/cg-project/GraphicsLayer/Library/Transform.cpp || cmake_object_order_depends_target_cg_project
-  DEP_FILE = CMakeFiles/cg_project.dir/GraphicsLayer/Library/Transform.cpp.o.d
+build CMakeFiles/cg_project.dir/open_gl/input.cpp.o: CXX_COMPILER__cg_project_Debug /Users/torbenbernhard/Desktop/Seattle$ U/Spring$ Quarter$ 2024/Graphics$ Project/cg-project/open_gl/input.cpp || cmake_object_order_depends_target_cg_project
+  DEP_FILE = CMakeFiles/cg_project.dir/open_gl/input.cpp.o.d
   FLAGS = -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk -mmacosx-version-min=11.7 -std=gnu++14
-  INCLUDES = -I"/Users/torbenbernhard/Desktop/Seattle U/cg-project/Inc" -I"/Users/torbenbernhard/Desktop/Seattle U/cg-project/Inc/freetype" -I"/Users/torbenbernhard/Desktop/Seattle U/cg-project/Inc/freetype/config" -I"/Users/torbenbernhard/Desktop/Seattle U/cg-project/Inc/GL" -I"/Users/torbenbernhard/Desktop/Seattle U/cg-project/GraphicsLayer/Include" -isystem /usr/local/include
+  INCLUDES = -I"/Users/torbenbernhard/Desktop/Seattle U/Spring Quarter 2024/Graphics Project/cg-project/Inc" -I"/Users/torbenbernhard/Desktop/Seattle U/Spring Quarter 2024/Graphics Project/cg-project/Inc/freetype" -I"/Users/torbenbernhard/Desktop/Seattle U/Spring Quarter 2024/Graphics Project/cg-project/Inc/freetype/config" -I"/Users/torbenbernhard/Desktop/Seattle U/Spring Quarter 2024/Graphics Project/cg-project/Inc/GL" -I"/Users/torbenbernhard/Desktop/Seattle U/Spring Quarter 2024/Graphics Project/cg-project/open_gl" -I"/Users/torbenbernhard/Desktop/Seattle U/Spring Quarter 2024/Graphics Project/cg-project/math" -isystem /usr/local/include
   OBJECT_DIR = CMakeFiles/cg_project.dir
-  OBJECT_FILE_DIR = CMakeFiles/cg_project.dir/GraphicsLayer/Library
+  OBJECT_FILE_DIR = CMakeFiles/cg_project.dir/open_gl
 
-build CMakeFiles/cg_project.dir/Engine/Library/Time.cpp.o: CXX_COMPILER__cg_project_Debug /Users/torbenbernhard/Desktop/Seattle$ U/cg-project/Engine/Library/Time.cpp || cmake_object_order_depends_target_cg_project
-  DEP_FILE = CMakeFiles/cg_project.dir/Engine/Library/Time.cpp.o.d
+build CMakeFiles/cg_project.dir/open_gl/scene.cpp.o: CXX_COMPILER__cg_project_Debug /Users/torbenbernhard/Desktop/Seattle$ U/Spring$ Quarter$ 2024/Graphics$ Project/cg-project/open_gl/scene.cpp || cmake_object_order_depends_target_cg_project
+  DEP_FILE = CMakeFiles/cg_project.dir/open_gl/scene.cpp.o.d
   FLAGS = -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk -mmacosx-version-min=11.7 -std=gnu++14
-  INCLUDES = -I"/Users/torbenbernhard/Desktop/Seattle U/cg-project/Inc" -I"/Users/torbenbernhard/Desktop/Seattle U/cg-project/Inc/freetype" -I"/Users/torbenbernhard/Desktop/Seattle U/cg-project/Inc/freetype/config" -I"/Users/torbenbernhard/Desktop/Seattle U/cg-project/Inc/GL" -I"/Users/torbenbernhard/Desktop/Seattle U/cg-project/GraphicsLayer/Include" -isystem /usr/local/include
+  INCLUDES = -I"/Users/torbenbernhard/Desktop/Seattle U/Spring Quarter 2024/Graphics Project/cg-project/Inc" -I"/Users/torbenbernhard/Desktop/Seattle U/Spring Quarter 2024/Graphics Project/cg-project/Inc/freetype" -I"/Users/torbenbernhard/Desktop/Seattle U/Spring Quarter 2024/Graphics Project/cg-project/Inc/freetype/config" -I"/Users/torbenbernhard/Desktop/Seattle U/Spring Quarter 2024/Graphics Project/cg-project/Inc/GL" -I"/Users/torbenbernhard/Desktop/Seattle U/Spring Quarter 2024/Graphics Project/cg-project/open_gl" -I"/Users/torbenbernhard/Desktop/Seattle U/Spring Quarter 2024/Graphics Project/cg-project/math" -isystem /usr/local/include
   OBJECT_DIR = CMakeFiles/cg_project.dir
-  OBJECT_FILE_DIR = CMakeFiles/cg_project.dir/Engine/Library
+  OBJECT_FILE_DIR = CMakeFiles/cg_project.dir/open_gl
 
-build CMakeFiles/cg_project.dir/Engine/Library/Engine.cpp.o: CXX_COMPILER__cg_project_Debug /Users/torbenbernhard/Desktop/Seattle$ U/cg-project/Engine/Library/Engine.cpp || cmake_object_order_depends_target_cg_project
-  DEP_FILE = CMakeFiles/cg_project.dir/Engine/Library/Engine.cpp.o.d
+build CMakeFiles/cg_project.dir/noise/PerlinNoise.cpp.o: CXX_COMPILER__cg_project_Debug /Users/torbenbernhard/Desktop/Seattle$ U/Spring$ Quarter$ 2024/Graphics$ Project/cg-project/noise/PerlinNoise.cpp || cmake_object_order_depends_target_cg_project
+  DEP_FILE = CMakeFiles/cg_project.dir/noise/PerlinNoise.cpp.o.d
   FLAGS = -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk -mmacosx-version-min=11.7 -std=gnu++14
-  INCLUDES = -I"/Users/torbenbernhard/Desktop/Seattle U/cg-project/Inc" -I"/Users/torbenbernhard/Desktop/Seattle U/cg-project/Inc/freetype" -I"/Users/torbenbernhard/Desktop/Seattle U/cg-project/Inc/freetype/config" -I"/Users/torbenbernhard/Desktop/Seattle U/cg-project/Inc/GL" -I"/Users/torbenbernhard/Desktop/Seattle U/cg-project/GraphicsLayer/Include" -isystem /usr/local/include
+  INCLUDES = -I"/Users/torbenbernhard/Desktop/Seattle U/Spring Quarter 2024/Graphics Project/cg-project/Inc" -I"/Users/torbenbernhard/Desktop/Seattle U/Spring Quarter 2024/Graphics Project/cg-project/Inc/freetype" -I"/Users/torbenbernhard/Desktop/Seattle U/Spring Quarter 2024/Graphics Project/cg-project/Inc/freetype/config" -I"/Users/torbenbernhard/Desktop/Seattle U/Spring Quarter 2024/Graphics Project/cg-project/Inc/GL" -I"/Users/torbenbernhard/Desktop/Seattle U/Spring Quarter 2024/Graphics Project/cg-project/open_gl" -I"/Users/torbenbernhard/Desktop/Seattle U/Spring Quarter 2024/Graphics Project/cg-project/math" -isystem /usr/local/include
   OBJECT_DIR = CMakeFiles/cg_project.dir
-  OBJECT_FILE_DIR = CMakeFiles/cg_project.dir/Engine/Library
+  OBJECT_FILE_DIR = CMakeFiles/cg_project.dir/noise
 
 
 # =============================================================================
@@ -150,7 +143,7 @@ build CMakeFiles/cg_project.dir/Engine/Library/Engine.cpp.o: CXX_COMPILER__cg_pr
 #############################################
 # Link the executable cg_project
 
-build cg_project: CXX_EXECUTABLE_LINKER__cg_project_Debug CMakeFiles/cg_project.dir/test.cpp.o CMakeFiles/cg_project.dir/Lib/GLXtras.cpp.o CMakeFiles/cg_project.dir/Lib/glad.c.o CMakeFiles/cg_project.dir/Lib/window.cpp.o CMakeFiles/cg_project.dir/GraphicsLayer/Library/MeshRenderer.cpp.o CMakeFiles/cg_project.dir/GraphicsLayer/Library/ShaderCompiler.cpp.o CMakeFiles/cg_project.dir/GraphicsLayer/Library/MeshData.cpp.o CMakeFiles/cg_project.dir/GraphicsLayer/Library/Transform.cpp.o CMakeFiles/cg_project.dir/Engine/Library/Time.cpp.o CMakeFiles/cg_project.dir/Engine/Library/Engine.cpp.o | /usr/local/lib/libglfw.3.4.dylib
+build cg_project: CXX_EXECUTABLE_LINKER__cg_project_Debug CMakeFiles/cg_project.dir/main.cpp.o CMakeFiles/cg_project.dir/Lib/glad.c.o CMakeFiles/cg_project.dir/open_gl/window.cpp.o CMakeFiles/cg_project.dir/open_gl/mesh.cpp.o CMakeFiles/cg_project.dir/math/transform.cpp.o CMakeFiles/cg_project.dir/open_gl/camera.cpp.o CMakeFiles/cg_project.dir/open_gl/input.cpp.o CMakeFiles/cg_project.dir/open_gl/scene.cpp.o CMakeFiles/cg_project.dir/noise/PerlinNoise.cpp.o | /usr/local/lib/libglfw.3.4.dylib
   FLAGS = -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk -mmacosx-version-min=11.7
   LINK_LIBRARIES = -Wl,-rpath,/usr/local/lib  /usr/local/lib/libglfw.3.4.dylib
   OBJECT_DIR = CMakeFiles/cg_project.dir
@@ -168,7 +161,7 @@ build cg_project: CXX_EXECUTABLE_LINKER__cg_project_Debug CMakeFiles/cg_project.
 # =============================================================================
 
 #############################################
-# Folder: /Users/torbenbernhard/Desktop/Seattle U/cg-project/cmake-build-debug
+# Folder: /Users/torbenbernhard/Desktop/Seattle U/Spring Quarter 2024/Graphics Project/cg-project/cmake-build-debug
 
 build all: phony cg_project
 

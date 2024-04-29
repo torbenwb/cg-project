@@ -10,5 +10,6 @@
 #include "MeshRenderer.h"
 #include "ShaderCompiler.h"
 #include "Transform.h"
+#include "Window.h"
 
 #endif //CG_PROJECT_GRAPHICSLAYER_H
