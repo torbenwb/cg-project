@@ -69,4 +69,20 @@ namespace open_gl
         meshRendererMap[shaderProgram][index].active = active;
     }
 
+    unsigned int Scene::newEntity(std::string name) {
+        unsigned int entity_id = next_id++;
+        entity_ids.emplace_back(entity_id);
+        entity_names.emplace_back(name);
+        entity_transforms.emplace_back(transform());
+        return 0;
+    }
+
+    void addMesh(unsigned int entity_id){
+        // find index of entity id in 
+    }
+
+    Scene::Scene() {
+
+    }
+
 }

@@ -12,6 +12,7 @@
 
 void updateView(math::Transform& viewTransform, glm::vec3& lookRotationEuler)
 {
+    const float MOVE_SPEED = 1.0f;
     glm::vec3 forward = viewTransform.getForward();
     glm::vec3 right = viewTransform.getRight();
 
@@ -41,12 +42,10 @@ void updateView(math::Transform& viewTransform, glm::vec3& lookRotationEuler)
     moveDirection.y -= z;
 
     // Update position and rotation
-    viewTransform.position += moveDirection * 0.1f;
+    viewTransform.position += moveDirection * MOVE_SPEED;
     viewTransform.rotation = combinedRotation;
 
-    if (open_gl::Input::getKey(GLFW_KEY_ESCAPE))
-        open_gl::Input::enableCursor();
-
+    if (open_gl::Input::getKey(GLFW_KEY_ESCAPE)) open_gl::Input::enableCursor();
 }
 
 open_gl::Scene scene;
@@ -89,9 +88,10 @@ int main()
 
     std::vector<open_gl::Mesh*> chunkMeshes;
     std::vector<math::Transform> chunkTransforms;
-    for(int x = -1; x <= 1; x++)
+    int chunk_depth = 2;
+    for(int x = -chunk_depth; x <= chunk_depth; x++)
     {
-        for(int z = -1; z <= 1; z++)
+        for(int z = -chunk_depth; z <= chunk_depth; z++)
         {
             chunkMeshes.emplace_back(open_gl::voxel::generateChunkMesh(x * open_gl::voxel::width, z * open_gl::voxel::width));
             chunkTransforms.emplace_back(math::Transform(glm::vec3(x * open_gl::voxel::width, 0, z * open_gl::voxel::width)));
