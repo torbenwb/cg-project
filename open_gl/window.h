@@ -39,6 +39,9 @@ namespace open_gl
         void update();
         void close();
         bool getShouldClose();
+        static void getWindowSize(int* width, int* height){
+            glfwGetWindowSize(window, width, height);
+        }
 
         static GLFWwindow* getWindow();
     };

@@ -88,9 +88,9 @@ int main()
     Voxel::WorldSeed newWorldSeed = Voxel::WorldSeed(
             math::random::randomInt(15, 25),
             math::random::randomInt(15, 25),
-            math::random::randomInt(15, 25),
+            math::random::randomInt(15, 50),
             2,
-            math::random::randomDouble(1.5, 2.5),
+            math::random::randomDouble(1.5, 3.0),
             math::random::randomDouble(1.5, 2.5),
             true
     );
@@ -116,7 +116,9 @@ int main()
         chunkLoader.setCurrentArea(chunkArea);
         chunkLoader.update();
 
-
+        int width, height;
+        window.getWindowSize(&width, &height);
+        projection.aspectRatio = (double)width / (double)height;
         window.update();
     }
     window.close();
