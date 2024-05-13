@@ -14,8 +14,8 @@ namespace open_gl
     class Window {
     private:
         const char* DEFAULT_TITLE = "Default Window Title";
-        const int DEFAULT_WIDTH = 500;
-        const int DEFAULT_HEIGHT = 500;
+        const int DEFAULT_WIDTH = 750;
+        const int DEFAULT_HEIGHT = 750;
         static GLFWwindow* window;
         int width, height;
         const char* title;

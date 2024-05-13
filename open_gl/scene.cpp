@@ -13,28 +13,23 @@ namespace open_gl
         glUniformMatrix4fv(glGetUniformLocation(shaderProgram, "view"), 1, GL_FALSE, glm::value_ptr(view));
         // Set perspective
         glUniformMatrix4fv(glGetUniformLocation(shaderProgram, "perspective"), 1, GL_FALSE, glm::value_ptr(projection));
-
-        //printf("light position: (%f, %f, %f)\n",light.x, light.y, light.z);
-        glUniform3fv(glGetUniformLocation(shaderProgram, "lightPosition"), 1, glm::value_ptr(light));
     }
 
     void Scene::render() {
         glClearColor(0.3, 0.8, 0.99, 0.5);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-        for(int i = 0; i < shaderPrograms.size(); i++)
-        {
-            setSceneUniforms(shaderPrograms[i]);
-
-            for(int j = 0; j < meshRendererMap[shaderPrograms[i]].size(); j++)
-            {
-                if (!meshRendererMap[shaderPrograms[i]][j].active) continue;
-                GLuint shaderProgram = shaderPrograms[i];
-                math::Transform meshTransform = *meshRendererMap[shaderPrograms[i]][j].transform;
-
-                meshRendererMap[shaderPrograms[i]][j].mesh->render(shaderPrograms[i], meshTransform.getMatrix());
-            }
+        for(int i = 0; i < shaders.size(); i++){
+            setSceneUniforms(shaders[i]);
         }
+
+        for (unsigned int i = 0; i < entities.size(); i++){
+            if (!entities[i].getActive()) continue;
+            unsigned int e_id = i;
+            transform t = getTransform(e_id);
+            mesh m = getMesh(e_id);
+            m.renderInstance(t.matrix());
+        }
+
 
         glFlush();
     }
@@ -43,46 +38,40 @@ namespace open_gl
 
     void Scene::setProjection(glm::mat4 projection) { this->projection = projection; }
 
-    void Scene::addMeshRenderer(Mesh *mesh, math::Transform * transform, GLuint shader)
-    {
-        if (std::find(shaderPrograms.begin(), shaderPrograms.end(), shader) == shaderPrograms.end())
-        {
-            shaderPrograms.emplace_back(shader);
-        }
-
-        if (meshRendererMap.find(shader) != meshRendererMap.end()) {
-            meshRendererMap[shader].emplace_back(MeshRenderer(mesh, transform));
-        }
-        else {
-            meshRendererMap[shader] = std::vector<MeshRenderer>();
-            meshRendererMap[shader].emplace_back(MeshRenderer(mesh, transform));
-        }
-    }
-
-    void Scene::addLight(math::Transform* transform, float intensity) {
-        lights.emplace_back(Light(transform, intensity));
-    }
-
-    void Scene::toggleMeshRendererActive(GLuint shaderProgram, int index, bool active) {
-        if (meshRendererMap.find(shaderProgram) == meshRendererMap.end()) return;
-
-        meshRendererMap[shaderProgram][index].active = active;
-    }
-
-    unsigned int Scene::newEntity(std::string name) {
-        unsigned int entity_id = next_id++;
-        entity_ids.emplace_back(entity_id);
-        entity_names.emplace_back(name);
-        entity_transforms.emplace_back(transform());
-        return 0;
-    }
-
-    void addMesh(unsigned int entity_id){
-        // find index of entity id in 
-    }
 
     Scene::Scene() {
 
     }
 
+    unsigned int Scene::newEntity(std::string name, transform t)
+    {
+        entities.emplace_back(entity(name));
+        transformTable[entities.size() - 1] = transforms.size();
+        transforms.emplace_back(t);
+        return entities.size() - 1;
+    }
+
+    void Scene::setEntityActive(unsigned int eId, bool newActive){
+        entities[eId].setActive(newActive);
+    }
+
+    void Scene::destroyEntity(unsigned int eId){
+        entities[eId].destroy();
+    }
+
+    // Add a mesh component to the scene
+    void Scene::addMesh(unsigned int entityId, mesh m) {
+        meshTable[entityId] = meshes.size();
+        meshes.emplace_back(m);
+        shaders.emplace_back(m.shaderProgram);
+    }
+
+    transform Scene::getTransform(unsigned int e_id){
+        return transforms[transformTable[e_id]];
+    }
+
+    mesh Scene::getMesh(unsigned int e_id){
+
+        return meshes[meshTable[e_id]];
+    }
 }

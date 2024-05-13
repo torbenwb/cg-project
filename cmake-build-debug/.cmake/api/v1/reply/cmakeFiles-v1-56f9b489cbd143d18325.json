@@ -147,6 +147,11 @@
 			"path" : "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.21/Modules/CMakeCommonLanguageInclude.cmake"
 		},
 		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.21/Modules/FetchContent.cmake"
+		},
+		{
 			"isExternal" : true,
 			"path" : "/usr/local/lib/cmake/glfw3/glfw3ConfigVersion.cmake"
 		},

@@ -8,6 +8,10 @@
 #include "glad.h"
 #include "glfw3.h"
 #include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
+#define GLM_ENABLE_EXPERIMENTAL
+#include <glm/gtx/quaternion.hpp>
 #include <vector>
 #include <unordered_map>
 #include "mesh.h"
@@ -16,36 +20,105 @@
 
 namespace open_gl
 {
+    struct entity {
+        const unsigned char ACTIVE = 1;
+        const unsigned char INACTIVE = 2;
+        const unsigned char DEAD = 0;
+    private:
+        unsigned char status = 1;
+    public:
+        std::string name;
+
+        bool getActive() {return status == ACTIVE;}
+        bool getDead() {return status == DEAD;}
+        void setActive(bool active){status = active ? ACTIVE : INACTIVE; }
+        void destroy() { status = DEAD; }
+
+        entity(){}
+        entity(std::string name){this->name = name;}
+    };
+
     struct transform {
+        transform(){}
+        transform(math::Transform* t){
+            position = t->position;
+            rotation = t->rotation;
+            scale = t->scale;
+        }
+        transform(glm::vec3 position){
+            this->position = position;
+        }
+
         glm::vec3 position = glm::vec3(0,0,0);
         glm::quat rotation = glm::quat();
         glm::vec3 scale = glm::vec3(1.0f, 1.0f, 1.0f);
-    };
 
-    struct MeshRenderer
-    {
-        Mesh* mesh;
-        math::Transform* transform;
-        bool active = true;
+        glm::mat4 matrix(){
+            glm::mat4 transformation = glm::mat4(1.0f);
 
-        MeshRenderer(Mesh* mesh, math::Transform* transform)
-        {
-            this->mesh = mesh;
-            this->transform = transform;
+            transformation = glm::translate(transformation, position);
+            transformation = glm::toMat4(rotation) * transformation;
+            transformation = glm::scale(transformation,scale);
+
+            return transformation;
         }
     };
 
-    struct Light
-    {
-        math::Transform* transform;
-        float intensity;
+    struct mesh {
+        mesh(){}
+        mesh(Mesh* meshptr, GLuint shader){
+            shaderProgram = shader;
+            vao = meshptr->getVAO();
+            vbo = meshptr->getVBO();
+            ebo = meshptr->getEBO();
+            vCount = meshptr->getVertexCount();
+            tCount = meshptr->getTriIndexCount();
+        }
+        GLuint shaderProgram;
+        GLuint vao;
+        GLuint vbo;
+        GLuint ebo;
 
-        Light(math::Transform* transform, float intensity)
+        unsigned int vCount;
+        unsigned int tCount;
+
+        void setAttributes()
         {
-            this->transform = transform;
-            this->intensity = intensity;
+            const char* VERT_ATTRIB_NAME = "point";
+            const char* NORMAL_ATTRIB_NAME = "normal";
+            const char* UV_ATTRIB_NAME = "uv";
+
+            glUseProgram(shaderProgram);
+            glBindBuffer(GL_ARRAY_BUFFER, vbo);
+
+            int normalOffset = (vCount * sizeof(glm::vec3));
+            int uvOffset = normalOffset + vCount * sizeof(glm::vec3);
+
+            GLint vertexAttributeId = glGetAttribLocation(shaderProgram, VERT_ATTRIB_NAME);
+            glEnableVertexAttribArray(vertexAttributeId);
+            glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
+
+            GLint normalAttributeId = glGetAttribLocation(shaderProgram, NORMAL_ATTRIB_NAME);
+            glEnableVertexAttribArray(normalAttributeId);
+            glVertexAttribPointer(normalAttributeId, 3, GL_FLOAT, GL_FALSE, 0, (void*)normalOffset);
+
+            GLint uvAttributeId = glGetAttribLocation(shaderProgram, UV_ATTRIB_NAME);
+            glEnableVertexAttribArray(uvAttributeId);
+            glVertexAttribPointer(uvAttributeId, 2, GL_FLOAT, GL_FALSE, 0, (void*)uvOffset);
+        }
+
+        void renderInstance(glm::mat4 model){
+            setAttributes();
+
+            glUniformMatrix4fv(glGetUniformLocation(shaderProgram, "model"), 1, GL_FALSE, glm::value_ptr(model));
+
+            glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
+            glDrawElements(GL_TRIANGLES, tCount, GL_UNSIGNED_INT, 0);
+
+
         }
     };
+
 
     class Scene {
     private:
@@ -53,16 +126,14 @@ namespace open_gl
 
         glm::mat4 view;
         glm::mat4 projection;
-        glm::vec3 light;
-        std::vector<GLuint> shaderPrograms;
-        std::vector<Light> lights;
-        std::unordered_map<GLuint, std::vector<MeshRenderer>> meshRendererMap;
 
-        std::vector<unsigned int> entity_ids;
-        std::vector<std::string> entity_names;
-        std::vector<transform> entity_transforms;
-        std::vector<Mesh*> entity_meshes;
-        std::vector<GLuint> entity_shaders;
+        std::vector<entity> entities;
+        std::vector<GLuint> shaders;
+        std::vector<mesh> meshes;
+        std::vector<transform> transforms;
+
+        std::unordered_map<unsigned int, unsigned int> transformTable;
+        std::unordered_map<unsigned int, unsigned int> meshTable;
 
         // Set scene uniforms for a single shader program
         void setSceneUniforms(GLuint shaderProgram);
@@ -73,14 +144,14 @@ namespace open_gl
         void setView(glm::mat4 view);
         void setProjection(glm::mat4 projection);
         void render();
-        void addMeshRenderer(Mesh* mesh, math::Transform* transform, GLuint shader);
-        void toggleMeshRendererActive(GLuint shaderProgram, int index, bool active);
 
-        unsigned int newEntity(std::string name);
-
-
-        void addLight(math::Transform* transform, float intensity);
-        void setLight(glm::vec3 light) { this->light = light; }
+        // Create a new entity with name and return id (index)
+        unsigned int newEntity(std::string name, transform t);
+        void setEntityActive(unsigned int entityId, bool newActive);
+        void destroyEntity(unsigned int entityId);
+        void addMesh(unsigned int entityId, mesh m);
+        transform getTransform(unsigned int entityId);
+        mesh getMesh(unsigned int entityId);
     };
 }
 

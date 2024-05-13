@@ -3,9 +3,7 @@
 #include "glad.h" // GL header file
 #include <GLFW/glfw3.h>       // GL toolkit
 #include <iostream>
-#include "GraphicsLayer.h"
 #include <glm/glm.hpp>
-#include "Engine/Include/Engine.h"
 
 GLuint program = 0;			// shader prog ID, valid if > 0
 

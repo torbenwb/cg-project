@@ -840,8 +840,8 @@ typedef void (* GLFWwindowposfun)(GLFWwindow*,int,int);
  *  This is the function signature for window size callback functions.
  *
  *  @param[in] window The window that was resized.
- *  @param[in] width The new width, in screen coordinates, of the window.
- *  @param[in] height The new height, in screen coordinates, of the window.
+ *  @param[in] width The new CHUNK_WIDTH, in screen coordinates, of the window.
+ *  @param[in] height The new CHUNK_HEIGHT, in screen coordinates, of the window.
  *
  *  @sa @ref window_size
  *  @sa glfwSetWindowSizeCallback
@@ -926,8 +926,8 @@ typedef void (* GLFWwindowiconifyfun)(GLFWwindow*,int);
  *  functions.
  *
  *  @param[in] window The window whose framebuffer was resized.
- *  @param[in] width The new width, in pixels, of the framebuffer.
- *  @param[in] height The new height, in pixels, of the framebuffer.
+ *  @param[in] width The new CHUNK_WIDTH, in pixels, of the framebuffer.
+ *  @param[in] height The new CHUNK_HEIGHT, in pixels, of the framebuffer.
  *
  *  @sa @ref window_fbsize
  *  @sa glfwSetFramebufferSizeCallback
@@ -1135,10 +1135,10 @@ typedef void (* GLFWjoystickfun)(int,int);
  */
 typedef struct GLFWvidmode
 {
-    /*! The width, in screen coordinates, of the video mode.
+    /*! The CHUNK_WIDTH, in screen coordinates, of the video mode.
      */
     int width;
-    /*! The height, in screen coordinates, of the video mode.
+    /*! The CHUNK_HEIGHT, in screen coordinates, of the video mode.
      */
     int height;
     /*! The bit depth of the red channel of the video mode.
@@ -1192,10 +1192,10 @@ typedef struct GLFWgammaramp
  */
 typedef struct GLFWimage
 {
-    /*! The width, in pixels, of this image.
+    /*! The CHUNK_WIDTH, in pixels, of this image.
      */
     int width;
-    /*! The height, in pixels, of this image.
+    /*! The CHUNK_HEIGHT, in pixels, of this image.
      */
     int height;
     /*! The pixel data of this image, arranged left-to-right, top-to-bottom.
@@ -1458,9 +1458,9 @@ GLFWAPI void glfwGetMonitorPos(GLFWmonitor* monitor, int* xpos, int* ypos);
  *  non-`NULL` size arguments will be set to zero.
  *
  *  @param[in] monitor The monitor to query.
- *  @param[out] widthMM Where to store the width, in millimetres, of the
+ *  @param[out] widthMM Where to store the CHUNK_WIDTH, in millimetres, of the
  *  monitor's display area, or `NULL`.
- *  @param[out] heightMM Where to store the height, in millimetres, of the
+ *  @param[out] heightMM Where to store the CHUNK_HEIGHT, in millimetres, of the
  *  monitor's display area, or `NULL`.
  *
  *  @errors Possible errors include @ref GLFW_NOT_INITIALIZED.
@@ -1532,7 +1532,7 @@ GLFWAPI GLFWmonitorfun glfwSetMonitorCallback(GLFWmonitorfun cbfun);
  *  This function returns an array of all video modes supported by the specified
  *  monitor.  The returned array is sorted in ascending order, first by color
  *  bit depth (the sum of all channel depths) and then by resolution area (the
- *  product of width and height).
+ *  product of CHUNK_WIDTH and CHUNK_HEIGHT).
  *
  *  @param[in] monitor The monitor to query.
  *  @param[out] count Where to store the number of video modes in the returned
@@ -1763,9 +1763,9 @@ GLFWAPI void glfwWindowHint(int hint, int value);
  *  The [swap interval](@ref buffer_swap) is not set during window creation and
  *  the initial value may vary depending on driver settings and defaults.
  *
- *  @param[in] width The desired width, in screen coordinates, of the window.
+ *  @param[in] width The desired CHUNK_WIDTH, in screen coordinates, of the window.
  *  This must be greater than zero.
- *  @param[in] height The desired height, in screen coordinates, of the window.
+ *  @param[in] height The desired CHUNK_HEIGHT, in screen coordinates, of the window.
  *  This must be greater than zero.
  *  @param[in] title The initial, UTF-8 encoded window title.
  *  @param[in] monitor The monitor to use for full screen mode, or `NULL` for
@@ -2037,9 +2037,9 @@ GLFWAPI void glfwSetWindowPos(GLFWwindow* window, int xpos, int ypos);
  *  non-`NULL` size arguments will be set to zero.
  *
  *  @param[in] window The window whose size to retrieve.
- *  @param[out] width Where to store the width, in screen coordinates, of the
+ *  @param[out] width Where to store the CHUNK_WIDTH, in screen coordinates, of the
  *  client area, or `NULL`.
- *  @param[out] height Where to store the height, in screen coordinates, of the
+ *  @param[out] height Where to store the CHUNK_HEIGHT, in screen coordinates, of the
  *  client area, or `NULL`.
  *
  *  @errors Possible errors include @ref GLFW_NOT_INITIALIZED and @ref
@@ -2071,13 +2071,13 @@ GLFWAPI void glfwGetWindowSize(GLFWwindow* window, int* width, int* height);
  *  dimensions and all must be greater than or equal to zero.
  *
  *  @param[in] window The window to set limits for.
- *  @param[in] minwidth The minimum width, in screen coordinates, of the client
+ *  @param[in] minwidth The minimum CHUNK_WIDTH, in screen coordinates, of the client
  *  area, or `GLFW_DONT_CARE`.
- *  @param[in] minheight The minimum height, in screen coordinates, of the
+ *  @param[in] minheight The minimum CHUNK_HEIGHT, in screen coordinates, of the
  *  client area, or `GLFW_DONT_CARE`.
- *  @param[in] maxwidth The maximum width, in screen coordinates, of the client
+ *  @param[in] maxwidth The maximum CHUNK_WIDTH, in screen coordinates, of the client
  *  area, or `GLFW_DONT_CARE`.
- *  @param[in] maxheight The maximum height, in screen coordinates, of the
+ *  @param[in] maxheight The maximum CHUNK_HEIGHT, in screen coordinates, of the
  *  client area, or `GLFW_DONT_CARE`.
  *
  *  @errors Possible errors include @ref GLFW_NOT_INITIALIZED, @ref
@@ -2154,9 +2154,9 @@ GLFWAPI void glfwSetWindowAspectRatio(GLFWwindow* window, int numer, int denom);
  *  and should not override these limits.
  *
  *  @param[in] window The window to resize.
- *  @param[in] width The desired width, in screen coordinates, of the window
+ *  @param[in] width The desired CHUNK_WIDTH, in screen coordinates, of the window
  *  client area.
- *  @param[in] height The desired height, in screen coordinates, of the window
+ *  @param[in] height The desired CHUNK_HEIGHT, in screen coordinates, of the window
  *  client area.
  *
  *  @errors Possible errors include @ref GLFW_NOT_INITIALIZED and @ref
@@ -2185,9 +2185,9 @@ GLFWAPI void glfwSetWindowSize(GLFWwindow* window, int width, int height);
  *  non-`NULL` size arguments will be set to zero.
  *
  *  @param[in] window The window whose framebuffer to query.
- *  @param[out] width Where to store the width, in pixels, of the framebuffer,
+ *  @param[out] width Where to store the CHUNK_WIDTH, in pixels, of the framebuffer,
  *  or `NULL`.
- *  @param[out] height Where to store the height, in pixels, of the framebuffer,
+ *  @param[out] height Where to store the CHUNK_HEIGHT, in pixels, of the framebuffer,
  *  or `NULL`.
  *
  *  @errors Possible errors include @ref GLFW_NOT_INITIALIZED and @ref
@@ -2419,11 +2419,11 @@ GLFWAPI GLFWmonitor* glfwGetWindowMonitor(GLFWwindow* window);
  *  This function sets the monitor that the window uses for full screen mode or,
  *  if the monitor is `NULL`, makes it windowed mode.
  *
- *  When setting a monitor, this function updates the width, height and refresh
+ *  When setting a monitor, this function updates the CHUNK_WIDTH, CHUNK_HEIGHT and refresh
  *  rate of the desired video mode and switches to the video mode closest to it.
  *  The window position is ignored when setting a monitor.
  *
- *  When the monitor is `NULL`, the position, width and height are used to
+ *  When the monitor is `NULL`, the position, CHUNK_WIDTH and CHUNK_HEIGHT are used to
  *  place the window client area.  The refresh rate is ignored when no monitor
  *  is specified.
  *
@@ -2442,7 +2442,7 @@ GLFWAPI GLFWmonitor* glfwGetWindowMonitor(GLFWwindow* window);
  *  client area.
  *  @param[in] width The desired with, in screen coordinates, of the client area
  *  or video mode.
- *  @param[in] height The desired height, in screen coordinates, of the client
+ *  @param[in] height The desired CHUNK_HEIGHT, in screen coordinates, of the client
  *  area or video mode.
  *  @param[in] refreshRate The desired refresh rate, in Hz, of the video mode,
  *  or `GLFW_DONT_CARE`.

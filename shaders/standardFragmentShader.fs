@@ -1,6 +1,5 @@
     #version 330 core
     uniform mat4 view;
-    uniform vec3 lightPosition;
     uniform sampler2D textureSampler;
     vec3 dirLight = vec3(0.5, 1, 0);
     vec3 dirLightColor = vec3(0.8, 0.95, 1.0);
@@ -16,8 +15,7 @@
         vec3 objectColor = vec3(1, 1, 1); // White color for the object
         objectColor = texture(textureSampler, fragUV).xyz;
         vec3 result = objectColor;
-        vec3 lightDir = normalize(lightPosition - fragPos);
-        lightDir = normalize(dirLight);
+        vec3 lightDir = normalize(dirLight);
         vec3 normal = normalize(fragNormal);
         vec3 backFaceNormal = normalize(-fragNormal);
         float d = dot(normal, lightDir);

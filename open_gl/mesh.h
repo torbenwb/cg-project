@@ -34,6 +34,12 @@ namespace open_gl
             void addUV(float u, float v);
             void addTriangle(int a, int b, int c);
     public:
+        GLuint getVAO(){return vao;}
+        GLuint getVBO(){return vbo;}
+        GLuint getEBO(){return ebo;}
+        GLuint getVertexCount(){return vertices.size();}
+        GLuint getTriIndexCount(){return triIndices.size();}
+
         Mesh();
         ~Mesh();
         void buffer();

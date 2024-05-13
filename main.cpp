@@ -1,16 +1,20 @@
+
 #include "open_gl/window.h"
-#include "open_gl/mesh.h"
-#include "open_gl/shaderLib.h"
-#include "open_gl/scene.h"
-#include "open_gl/voxel.h"
-#include "math/transform.h"
-#include "math/projection.h"
 #include <glm/glm.hpp>
 #include <glm/gtc/type_ptr.hpp>
+#include <thread>
 #include "input.h"
+#include "OGL/Scene.h"
+#include "OGL/Mesh.h"
+#include "OGL/Transform.h"
+#include "OGL/Material.h"
+#include "projection.h"
+#include "Voxel/World.h"
+#include "Voxel/Chunk.h"
+#include "Voxel/ChunkLoader.h"
+#include "math/random.h"
 
-
-void updateView(math::Transform& viewTransform, glm::vec3& lookRotationEuler)
+void updateView(OGL::Transform& viewTransform, glm::vec3& lookRotationEuler)
 {
     const float MOVE_SPEED = 1.0f;
     glm::vec3 forward = viewTransform.getForward();
@@ -48,74 +52,70 @@ void updateView(math::Transform& viewTransform, glm::vec3& lookRotationEuler)
     if (open_gl::Input::getKey(GLFW_KEY_ESCAPE)) open_gl::Input::enableCursor();
 }
 
-open_gl::Scene scene;
+glm::vec3 getChunkOrigin(glm::vec3 worldPosition) {
+    const int WIDTH = Voxel::Chunk::WIDTH;
+    const int HEIGHT = Voxel::Chunk::HEIGHT;
+    int globalX = worldPosition.x;
+    int globalY = worldPosition.y;
+    int globalZ = worldPosition.z;
+    int x = globalX >= 0 ? (globalX / WIDTH) * WIDTH : ((globalX / WIDTH) - 1) * WIDTH;
+    int y = (globalY / HEIGHT) * HEIGHT;
+    int z = globalZ >= 0 ? (globalZ / WIDTH) * WIDTH : ((globalZ / WIDTH) - 1) * WIDTH;
+    x = -x - WIDTH;
+    y = 0;
+    z = -z - WIDTH;
+    return {x, y, z};
+}
+
+
 
 int main()
 {
+
     open_gl::Window window;
     window.open();
     open_gl::Input::registerCallbacks();
     open_gl::Input::disableCursor();
 
-    // Transforms
-    float yaw = 0.0f, roll = 0.0f, pitch = 0.0f;
+
+    OGL::Material voxelMaterial(
+            "/Users/torbenbernhard/Desktop/Seattle U/Spring Quarter 2024/Graphics Project/cg-project/shaders/standardVertexShader.vs",
+            "/Users/torbenbernhard/Desktop/Seattle U/Spring Quarter 2024/Graphics Project/cg-project/shaders/standardFragmentShader.fs",
+            "/Users/torbenbernhard/Desktop/Seattle U/Spring Quarter 2024/Graphics Project/cg-project/pixil-frame-0.png"
+            );
+    voxelMaterial.compile();
+
+    Voxel::WorldSeed newWorldSeed = Voxel::WorldSeed(
+            math::random::randomInt(15, 25),
+            math::random::randomInt(15, 25),
+            math::random::randomInt(15, 25),
+            2,
+            math::random::randomDouble(1.5, 2.5),
+            math::random::randomDouble(1.5, 2.5),
+            true
+    );
+    Voxel::World::worldSeed = newWorldSeed;
+
+    OGL::Transform viewTransform;
     glm::vec3 lookRotationEuler;
-    math::Transform model;
-    model.scale = glm::vec3(1.0f, 1.0f, 1.0f);
-    model.position = glm::vec3(0.f, 0.0f, 0.0f);
-
-    math::Transform view;
-    view.position = glm::vec3(0.0f, 0.0f, -5.0f);
-    view.rotation = glm::quat(glm::vec3(0.0f, yaw, 0.0f));
-
     math::Projection projection(1.0f, 1.0f, 0.01f, 1000.0f);
+    OGL::Scene scene;
 
-    GLuint vertexShader = open_gl::compileShader("/Users/torbenbernhard/Desktop/Seattle U/Spring Quarter 2024/Graphics Project/cg-project/shaders/standardVertexShader.vs", GL_VERTEX_SHADER);
-    GLuint fragmentShader = open_gl::compileShader("/Users/torbenbernhard/Desktop/Seattle U/Spring Quarter 2024/Graphics Project/cg-project/shaders/standardFragmentShader.fs", GL_FRAGMENT_SHADER);
-    GLuint shaderProgram = open_gl::linkShaderProgram(vertexShader, fragmentShader);
-    const char* atlasfp = "/Users/torbenbernhard/Desktop/Seattle U/Spring Quarter 2024/Graphics Project/cg-project/pixil-frame-0.png";
-    GLuint textureId = open_gl::bufferTextureFromFile(atlasfp, true);
 
-    // Get the uniform location of the texture sampler
-    GLint textureLocation = glGetUniformLocation(shaderProgram, "textureSampler");
-
-    // Set the active texture unit and bind the texture to it
-    glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_2D, textureId);
-
-    // Set the value of the uniform to the texture unit index
-    glUniform1i(textureLocation, 0); // 0 is the texture unit index
-
-    std::vector<open_gl::Mesh*> chunkMeshes;
-    std::vector<math::Transform> chunkTransforms;
-    int chunk_depth = 2;
-    for(int x = -chunk_depth; x <= chunk_depth; x++)
-    {
-        for(int z = -chunk_depth; z <= chunk_depth; z++)
-        {
-            chunkMeshes.emplace_back(open_gl::voxel::generateChunkMesh(x * open_gl::voxel::width, z * open_gl::voxel::width));
-            chunkTransforms.emplace_back(math::Transform(glm::vec3(x * open_gl::voxel::width, 0, z * open_gl::voxel::width)));
-        }
-    }
-
-    for(int i = 0; i < chunkMeshes.size(); i++)
-    {
-        scene.addMeshRenderer(chunkMeshes[i], &chunkTransforms[i], shaderProgram);
-    }
-
-    glEnable(GL_DEPTH_TEST);
-    glEnable(GL_CULL_FACE);
-    glCullFace(GL_BACK);
-    glFrontFace(GL_CCW);
-
+    Voxel::ChunkLoader chunkLoader(&voxelMaterial, &scene);
 
     while(!window.getShouldClose())
     {
-        updateView(view, lookRotationEuler);
+        updateView(viewTransform, lookRotationEuler);
 
-        scene.setView(view.getMatrix());
-        scene.setProjection(projection.getMatrix());
-        scene.render();
+        scene.render(viewTransform.getMatrix(), projection.getMatrix());
+
+        glm::vec3 chunkOrigin = getChunkOrigin(viewTransform.position);
+        std::vector<glm::vec3> chunkArea = Voxel::ChunkLoader::getChunkArea(chunkOrigin, 4);
+        chunkLoader.queueChunkArea(chunkArea);
+        chunkLoader.setCurrentArea(chunkArea);
+        chunkLoader.update();
+
 
         window.update();
     }
