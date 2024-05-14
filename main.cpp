@@ -86,11 +86,11 @@ int main()
     voxelMaterial.compile();
 
     Voxel::WorldSeed newWorldSeed = Voxel::WorldSeed(
-            math::random::randomInt(15, 25),
-            math::random::randomInt(15, 25),
-            math::random::randomInt(15, 50),
+            math::random::randomInt(15, 35),
+            math::random::randomInt(15, 35),
+            math::random::randomInt(15, 75),
             2,
-            math::random::randomDouble(1.5, 3.0),
+            math::random::randomDouble(1.5, 5.0),
             math::random::randomDouble(1.5, 2.5),
             true
     );
@@ -111,7 +111,8 @@ int main()
         scene.render(viewTransform.getMatrix(), projection.getMatrix());
 
         glm::vec3 chunkOrigin = getChunkOrigin(viewTransform.position);
-        std::vector<glm::vec3> chunkArea = Voxel::ChunkLoader::getChunkArea(chunkOrigin, 4);
+        std::vector<glm::vec3> chunkArea = Voxel::ChunkLoader::getChunkArea(chunkOrigin, 5);
+
         chunkLoader.queueChunkArea(chunkArea);
         chunkLoader.setCurrentArea(chunkArea);
         chunkLoader.update();
