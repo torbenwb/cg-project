@@ -6,6 +6,9 @@
 #define CG_PROJECT_WORLD_H
 
 #include <glm/glm.hpp>
+#include <tuple>
+#include <unordered_map>
+#include <functional>
 
 namespace Voxel
 {
@@ -47,12 +50,40 @@ namespace Voxel
         static const unsigned short VOXEL_TYPE_GRASS = 2;
         static const unsigned short VOXEL_TYPE_WATER = 3;
         static const unsigned short VOXEL_TYPE_SAND = 4;
+        static const unsigned short VOXEL_TYPE_STONE = 5;
+        static const unsigned short VOXEL_TYPE_WOOD = 6;
+        static const unsigned short VOXEL_TYPE_LEAVES = 7;
+        static const unsigned short VOXEL_TYPE_DIRT = 8;
+
+        struct TupleHash {
+            std::size_t operator()(const std::tuple<int, int, int>& key) const {
+                std::size_t h1 = std::hash<int>{}(std::get<0>(key));
+                std::size_t h2 = std::hash<int>{}(std::get<1>(key));
+                std::size_t h3 = std::hash<int>{}(std::get<2>(key));
+                return h1 ^ (h2 << 1) ^ (h3 << 2); // Combine the hashes
+            }
+        };
+
+        static struct Delta {
+            int x;
+            int y;
+            int z;
+            unsigned short type;
+            Delta();
+            Delta(int x, int y, int z, unsigned short type): x(x), y(y), z(z), type(type){}
+        };
+
+        static std::unordered_map<std::tuple<int, int, int>, unsigned short, TupleHash> deltas;
+        static std::vector<Delta> deltaList;
+
 
         static unsigned short getVoxelType(int x, int y, int z);
+        static bool getDelta(int x, int y, int z, unsigned short & delta);
         static bool getVoxelEmpty(int x, int y, int z);
         static WorldSeed worldSeed;
 
         static unsigned short *** getChunk(glm::vec3 origin, int width, int height);
+        static void setVoxelType(int x, int y, int z, unsigned short voxelType);
 
         // Todo
         /*

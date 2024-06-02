@@ -13,6 +13,7 @@
 #include "Voxel/Chunk.h"
 #include "Voxel/ChunkLoader.h"
 #include "math/random.h"
+#include <cmath>
 
 void updateView(OGL::Transform& viewTransform, glm::vec3& lookRotationEuler)
 {
@@ -52,6 +53,7 @@ void updateView(OGL::Transform& viewTransform, glm::vec3& lookRotationEuler)
     if (open_gl::Input::getKey(GLFW_KEY_ESCAPE)) open_gl::Input::enableCursor();
 }
 
+
 glm::vec3 getChunkOrigin(glm::vec3 worldPosition) {
     const int WIDTH = Voxel::Chunk::WIDTH;
     const int HEIGHT = Voxel::Chunk::HEIGHT;
@@ -67,7 +69,20 @@ glm::vec3 getChunkOrigin(glm::vec3 worldPosition) {
     return {x, y, z};
 }
 
+ OGL::Mesh* voxel(unsigned short type){
+    std::vector<glm::vec3> verts;
+    std::vector<glm::vec2> uvs;
+    std::vector<int> tris;
 
+    unsigned short vType = type;
+    Voxel::Chunk::topFace(vType, glm::vec3(0.0f, 0.0f, 0.0f), verts,tris, uvs);
+    Voxel::Chunk::bottomFace(vType, glm::vec3(0.0f, 0.0f, 0.0f), verts,tris, uvs);
+    Voxel::Chunk::leftFace(vType, glm::vec3(0.0f, 0.0f, 0.0f), verts,tris, uvs);
+    Voxel::Chunk::rightFace(vType, glm::vec3(0.0f, 0.0f, 0.0f), verts,tris, uvs);
+    Voxel::Chunk::frontFace(vType, glm::vec3(0.0f, 0.0f, 0.0f), verts,tris, uvs);
+    Voxel::Chunk::backFace(vType, glm::vec3(0.0f, 0.0f, 0.0f), verts,tris, uvs);
+    return new OGL::Mesh(verts, uvs, tris);
+}
 
 int main()
 {
@@ -86,32 +101,136 @@ int main()
     voxelMaterial.compile();
 
     Voxel::WorldSeed newWorldSeed = Voxel::WorldSeed(
-            math::random::randomInt(15, 35),
-            math::random::randomInt(15, 35),
-            math::random::randomInt(15, 75),
+            math::random::randomInt(15, 30),
+            math::random::randomInt(15, 30),
+            math::random::randomInt(15, 30),
             2,
-            math::random::randomDouble(1.5, 5.0),
+            math::random::randomDouble(1.5, 2.5),
             math::random::randomDouble(1.5, 2.5),
             true
     );
     Voxel::World::worldSeed = newWorldSeed;
 
     OGL::Transform viewTransform;
+    OGL::Transform cubeTransform;
+    OGL::Transform cube2Transform;
     glm::vec3 lookRotationEuler;
     math::Projection projection(1.0f, 1.0f, 0.01f, 1000.0f);
     OGL::Scene scene;
 
 
     Voxel::ChunkLoader chunkLoader(&voxelMaterial, &scene);
+    unsigned char placeVoxelType = Voxel::World::VOXEL_TYPE_STONE;
+    OGL::Mesh* cubeMesh = voxel(placeVoxelType);
+    unsigned int cubeIndex = scene.addMeshRenderer(cubeMesh->getMeshData(), voxelMaterial.getShaderProgram(), cubeTransform);
+    //unsigned int cubeTwo = scene.addMeshRenderer(cubeMesh->getMeshData(), voxelMaterial.getShaderProgram(), cube2Transform);
+    glm::vec3 targetPosition = glm::vec3(0.0f, 0.0f, 0.0f);
+    glm::vec3 cube2Position = glm::vec3(0.0f, 0.0f, 0.0f);
+
+
+
+    bool leftMouseDown;
+    bool rightMouseDown;
 
     while(!window.getShouldClose())
     {
+
+
         updateView(viewTransform, lookRotationEuler);
+        float y = viewTransform.position.y;
+        float x = viewTransform.position.x;
+        float z = viewTransform.position.z;
+        targetPosition.y = -y;
+        targetPosition.x = -x;
+        targetPosition.z = -z;
+        targetPosition += viewTransform.getForward() * -5.0f;
+
+        targetPosition.x = round(targetPosition.x);
+        targetPosition.y = round(targetPosition.y);
+        targetPosition.z = round(targetPosition.z);
+        cubeTransform.position = targetPosition;
+        //printf("view position: (%f, %f, %f), cube position: (%f, %f, %f)\n", viewTransform.position.x, viewTransform.position.y, viewTransform.position.z, cubeTransform.position.x, cubeTransform.position.y, cubeTransform.position.z);
+        scene.updateMeshRendererTransform(cubeIndex, cubeTransform);
+
+
 
         scene.render(viewTransform.getMatrix(), projection.getMatrix());
 
         glm::vec3 chunkOrigin = getChunkOrigin(viewTransform.position);
-        std::vector<glm::vec3> chunkArea = Voxel::ChunkLoader::getChunkArea(chunkOrigin, 5);
+        std::vector<glm::vec3> chunkArea = Voxel::ChunkLoader::getChunkArea(chunkOrigin, 2);
+
+        if (open_gl::Input::getKey(GLFW_KEY_0)) {
+            placeVoxelType = Voxel::World::VOXEL_TYPE_EMPTY;
+            scene.setMeshRendererActive(cubeIndex, false);
+        }
+        if (open_gl::Input::getKey(GLFW_KEY_1)) {
+            placeVoxelType = Voxel::World::VOXEL_TYPE_GRASS;
+            delete cubeMesh;
+            cubeMesh = voxel(placeVoxelType);
+            scene.updateMeshRendererMeshData(cubeIndex, cubeMesh->getMeshData());
+            scene.setMeshRendererActive(cubeIndex, true);
+        }
+        if (open_gl::Input::getKey(GLFW_KEY_2)) {
+            placeVoxelType = Voxel::World::VOXEL_TYPE_WATER;
+            delete cubeMesh;
+            cubeMesh = voxel(placeVoxelType);
+            scene.updateMeshRendererMeshData(cubeIndex, cubeMesh->getMeshData());
+            scene.setMeshRendererActive(cubeIndex, true);
+        }
+        if (open_gl::Input::getKey(GLFW_KEY_3)) {
+            placeVoxelType = Voxel::World::VOXEL_TYPE_SAND;
+            delete cubeMesh;
+            cubeMesh = voxel(placeVoxelType);
+            scene.updateMeshRendererMeshData(cubeIndex, cubeMesh->getMeshData());
+            scene.setMeshRendererActive(cubeIndex, true);
+        }
+        if (open_gl::Input::getKey(GLFW_KEY_4)) {
+            placeVoxelType = Voxel::World::VOXEL_TYPE_STONE;
+            delete cubeMesh;
+            cubeMesh = voxel(placeVoxelType);
+            scene.updateMeshRendererMeshData(cubeIndex, cubeMesh->getMeshData());
+            scene.setMeshRendererActive(cubeIndex, true);
+        }
+        if (open_gl::Input::getKey(GLFW_KEY_5)) {
+            placeVoxelType = Voxel::World::VOXEL_TYPE_WOOD;
+            delete cubeMesh;
+            cubeMesh = voxel(placeVoxelType);
+            scene.updateMeshRendererMeshData(cubeIndex, cubeMesh->getMeshData());
+            scene.setMeshRendererActive(cubeIndex, true);
+        }
+        if (open_gl::Input::getKey(GLFW_KEY_6)) {
+            placeVoxelType = Voxel::World::VOXEL_TYPE_LEAVES;
+            delete cubeMesh;
+            cubeMesh = voxel(placeVoxelType);
+            scene.updateMeshRendererMeshData(cubeIndex, cubeMesh->getMeshData());
+            scene.setMeshRendererActive(cubeIndex, true);
+        }
+        if (open_gl::Input::getKey(GLFW_KEY_7)) {
+            placeVoxelType = Voxel::World::VOXEL_TYPE_DIRT;
+            delete cubeMesh;
+            cubeMesh = voxel(placeVoxelType);
+            scene.updateMeshRendererMeshData(cubeIndex, cubeMesh->getMeshData());
+            scene.setMeshRendererActive(cubeIndex, true);
+        }
+
+        if (open_gl::Input::getMouseLeft()) leftMouseDown = true;
+        else if (leftMouseDown) {
+            Voxel::World::setVoxelType(targetPosition.x, targetPosition.y, targetPosition.z, placeVoxelType);
+            for(auto origin : chunkArea){
+                chunkLoader.reloadChunk(origin);
+            }
+        }
+        if (!open_gl::Input::getMouseLeft()) leftMouseDown = false;
+
+        if (open_gl::Input::getMouseRight()) rightMouseDown = true;
+        else if (rightMouseDown){
+            Voxel::World::setVoxelType(targetPosition.x, targetPosition.y, targetPosition.z, Voxel::World::VOXEL_TYPE_EMPTY);
+            for(auto origin : chunkArea){
+                chunkLoader.reloadChunk(origin);
+            }
+        }
+        if (!open_gl::Input::getMouseRight()) rightMouseDown = false;
+
 
         chunkLoader.queueChunkArea(chunkArea);
         chunkLoader.setCurrentArea(chunkArea);

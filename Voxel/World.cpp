@@ -4,12 +4,20 @@
 
 #include "World.h"
 #include "../noise/PerlinNoise.h"
+#include <iostream>
 
 namespace Voxel
 {
     WorldSeed World::worldSeed = WorldSeed(25, 25, 25, 2, 2.25, 2.5, true);
+    std::unordered_map<std::tuple<int, int, int>, unsigned short, World::TupleHash> World::deltas;
+    std::vector<World::Delta> World::deltaList;
 
     unsigned short World::getVoxelType(int x, int y, int z) {
+
+        unsigned short delta;
+        if (getDelta(x, y, z, delta)) {
+            return delta;
+        }
         int waterLevel = 2;
         int sandLevel = 2;
         if (y < waterLevel){
@@ -60,5 +68,19 @@ namespace Voxel
             }
         }
         return chunk;
+    }
+
+    void World::setVoxelType(int x, int y, int z, unsigned short voxelType) {
+        deltas[{x, y, z}] = voxelType;
+        deltaList.emplace_back(Delta(x, y, z, voxelType));
+    }
+
+    bool World::getDelta(int x, int y, int z, unsigned short & delta){
+        std::tuple<int, int, int> key = {x ,y, z};
+        if (deltas.find(key) != deltas.end()){
+            delta = deltas[{x, y, z}];
+            return true;
+        }
+        return false;
     }
 }

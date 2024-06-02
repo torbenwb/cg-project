@@ -58,6 +58,12 @@ namespace OGL
         return true;
     }
 
+    bool Scene::updateMeshRendererMeshData(unsigned int index, MeshData meshData){
+        if (index < 0 || index > meshRenderers.size()) return false;
+        meshRenderers[index].meshData = meshData;
+        return true;
+    }
+
     bool Scene::removeMeshRenderer(unsigned int index) {
         if (index < 0 || index > meshRenderers.size()) return false;
         meshRendererPool.emplace_back(index);
@@ -71,6 +77,12 @@ namespace OGL
         glEnable(GL_CULL_FACE);
         glCullFace(GL_BACK);
         glFrontFace(GL_CCW);
+    }
+
+    bool Scene::setMeshRendererActive(unsigned int index, bool active) {
+        if (index < 0 || index > meshRenderers.size()) return false;
+        meshRenderers[index].active = active;
+        return  true;
     }
 
 

@@ -15,6 +15,13 @@ namespace open_gl
     bool Input::windowFocus = true;
     bool Input::cursorFocus = true;
 
+    bool Input::getMouseLeft(){
+        return glfwGetMouseButton(Window::getWindow(), GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS;
+    }
+    bool Input::getMouseRight(){
+        return glfwGetMouseButton(Window::getWindow(), GLFW_MOUSE_BUTTON_RIGHT) == GLFW_PRESS;
+    }
+
     bool Input::getKey(int key) {
         if (!windowFocus) return false;
         GLFWwindow* window = Window::getWindow();
@@ -89,7 +96,6 @@ namespace open_gl
         {
             if (cursorFocus) disableCursor();
         }
-
     }
 }
 

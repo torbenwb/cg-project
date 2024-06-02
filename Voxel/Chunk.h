@@ -21,7 +21,7 @@ namespace Voxel
         static const char RIGHT_FACE = 3;
         static const char BACK_FACE = 4;
         static const char FRONT_FACE = 5;
-
+    public:
 
         static void topFace(const unsigned short voxelType, glm::vec3 offset, std::vector<glm::vec3>& vertices, std::vector<int>& indices, std::vector<glm::vec2>& uvs);
         static void bottomFace(const unsigned short voxelType, glm::vec3 offset, std::vector<glm::vec3>& vertices, std::vector<int>& indices, std::vector<glm::vec2>& uvs);
@@ -32,10 +32,6 @@ namespace Voxel
         static void getFaceUVs(const char face, const unsigned int voxelType, std::vector<glm::vec2>& uvs);
         static void getAtlasUVs(int x, int y, int width, int height, std::vector<glm::vec2> &uvs);
 
-
-
-
-    public:
         static const unsigned int WIDTH;
         static const unsigned int HEIGHT;
 

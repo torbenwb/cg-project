@@ -14,10 +14,11 @@ namespace OGL
     {
     private:
 
-        MeshData meshData;
+
         GLuint shaderProgram;
 
     public:
+        MeshData meshData;
         bool active;
         Transform transform;
 

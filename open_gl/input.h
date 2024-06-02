@@ -31,6 +31,8 @@ namespace open_gl
         static void enableCursor();
         static float getMouseX();
         static float getMouseY();
+        static bool getMouseLeft();
+        static bool getMouseRight();
     };
 }
 

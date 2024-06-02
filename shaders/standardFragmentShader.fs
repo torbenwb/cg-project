@@ -2,7 +2,7 @@
     uniform mat4 view;
     uniform sampler2D textureSampler;
     vec3 dirLight = vec3(0.5, 1, 0);
-    vec3 dirLightColor = vec3(0.8, 0.95, 1.0);
+    vec3 dirLightColor = vec3(0.95, 0.95, 1.0);
 
     in vec3 fragPos; // world space position of point
     in vec3 fragNormal; // world space normal of point

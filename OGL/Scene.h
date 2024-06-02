@@ -26,6 +26,8 @@ namespace OGL
         unsigned int addMeshRenderer(MeshData meshData, GLuint shaderProgram, Transform transform);
         bool updateMeshRendererTransform(unsigned int index, Transform transform);
         bool removeMeshRenderer(unsigned int index);
+        bool updateMeshRendererMeshData(unsigned int index, MeshData);
+        bool setMeshRendererActive(unsigned int index, bool active);
     };
 }
 

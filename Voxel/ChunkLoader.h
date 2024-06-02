@@ -36,6 +36,7 @@ namespace Voxel
         bool isChunkInCurrentArea(glm::vec3 origin);
         void setCurrentArea(std::vector<glm::vec3> area);
         void update();
+        void reloadChunk(glm::vec3 origin);
 
         static std::vector<glm::vec3> getChunkArea(glm::vec3 origin, int distance);
 

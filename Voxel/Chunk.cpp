@@ -115,19 +115,38 @@ namespace Voxel
 
     void Chunk::getFaceUVs(const char face, const unsigned int voxelType, std::vector<glm::vec2> &uvs) {
         if (voxelType == World::VOXEL_TYPE_WATER){
-            getAtlasUVs(0, 0, 2, 2, uvs);
+            getAtlasUVs(0, 2, 4, 4, uvs);
             return;
         }
         if (voxelType == World::VOXEL_TYPE_SAND){
-            getAtlasUVs(1, 0, 2, 2, uvs);
+            getAtlasUVs(1, 2, 4, 4, uvs);
             return;
         }
-        if (face == TOP_FACE) getAtlasUVs(0, 1, 2, 2, uvs);
-        else if (face == LEFT_FACE) getAtlasUVs(1, 1, 2, 2, uvs);
-        else if (face == RIGHT_FACE) getAtlasUVs(1, 1, 2, 2, uvs);
-        else if (face == FRONT_FACE) getAtlasUVs(1, 1, 2, 2, uvs);
-        else if (face == BACK_FACE) getAtlasUVs(1, 1, 2, 2, uvs);
-        else getAtlasUVs(1, 1, 2, 2, uvs);
+        if (voxelType == World::VOXEL_TYPE_GRASS)
+        {
+            if (face == TOP_FACE) getAtlasUVs(0, 3, 4, 4, uvs);
+            else if (face == LEFT_FACE) getAtlasUVs(1, 3, 4, 4, uvs);
+            else if (face == RIGHT_FACE) getAtlasUVs(1, 3, 4, 4, uvs);
+            else if (face == FRONT_FACE) getAtlasUVs(1, 3, 4, 4, uvs);
+            else if (face == BACK_FACE) getAtlasUVs(1, 3, 4, 4, uvs);
+            else getAtlasUVs(1, 3, 4, 4, uvs);
+        }
+        if (voxelType == World::VOXEL_TYPE_STONE){
+            getAtlasUVs(2, 3, 4, 4, uvs);
+            return;
+        }
+        if (voxelType == World::VOXEL_TYPE_WOOD){
+            getAtlasUVs(2, 2, 4, 4, uvs);
+            return;
+        }
+        if (voxelType == World::VOXEL_TYPE_LEAVES){
+            getAtlasUVs(3, 2, 4, 4, uvs);
+            return;
+        }
+        if (voxelType == World::VOXEL_TYPE_DIRT){
+            getAtlasUVs(3, 3, 4, 4, uvs);
+            return;
+        }
     }
 
     void Chunk::getAtlasUVs(int x, int y, int width, int height, std::vector<glm::vec2> &uvs){

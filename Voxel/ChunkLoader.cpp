@@ -108,5 +108,10 @@ namespace Voxel
         return false;
     }
 
+    void ChunkLoader::reloadChunk(glm::vec3 origin) {
+        unloadChunk(origin);
+        loadChunk(origin);
+    }
+
 }
 
